@@ -7,7 +7,7 @@ import config from "../../config";
 import { CreateInvoiceProcess } from 'services/DataIngest';
 import Button from '@mui/material/Button';
 import { CreateUserStorage } from 'services/StorageConf';
-import KeycloakService from 'services/KeycloakService';
+import {KeycloakService} from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
 import { styled } from '@mui/material/styles';
