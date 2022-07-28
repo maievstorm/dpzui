@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import { CreateUserStorage } from 'services/StorageConf';
 import { DpzStorageConf } from 'services/StorageConf';
-import KeycloakService from 'services/KeycloakService';
+//import KeycloakService from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
 import RateReviewIcon from '@mui/icons-material/RateReview';
@@ -349,20 +349,21 @@ export default function ManageSubscription() {
 
             // };
 
-            KeycloakService.addUser(user_name, first_name, last_name, email, password)
-                .then(() => {
-                    console.log('Add user done!')
-                    let status = 1
-                    changeRequestStatus(id, status)
-                        .then(() => {
-                            console.log('Update user status done!')
-                            UserAccount.addUser(first_name, last_name, user_name, password, email)
-                            window.location.reload()
-                        })
-                        .catch(err => console.log(err))
+            // KeycloakService.addUser(user_name, first_name, last_name, email, password)
+            //     .then(() => {
+            //         console.log('Add user done!')
+            //         let status = 1
+            //         changeRequestStatus(id, status)
+            //             .then(() => {
+            //                 console.log('Update user status done!')
+            //                 UserAccount.addUser(first_name, last_name, user_name, password, email)
+            //                 window.location.reload()
+            //             })
+            //             .catch(err => console.log(err))
 
-                })
-                .catch(err => console.log(err))
+            //     })
+            //     .catch(err => console.log(err))
+            console.log('a');
 
 
 
