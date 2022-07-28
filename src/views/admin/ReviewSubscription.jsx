@@ -7,7 +7,7 @@ import config from "../../config";
 import { CreateInvoiceProcess } from 'services/DataIngest';
 import Button from '@mui/material/Button';
 import { CreateUserStorage } from 'services/StorageConf';
-import {KeycloakService} from 'services/KeycloakService';
+//import {KeycloakService} from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
 import { styled } from '@mui/material/styles';
@@ -287,20 +287,22 @@ export default function ReviewSubscription() {
         else {
 
 
-            KeycloakService.addUser(username, full_name, email, password)
-                .then(() => {
-                    console.log('Add user done!')
-                    let status = 1
-                    changeRequestStatus(requestid, status)
-                        .then(() => {
-                            console.log('Update user status done!')
-                            UserAccount.addUser(full_name, full_name, username, password, email)
-                            window.location.reload()
-                        })
-                        .catch(err => console.log(err))
+            // KeycloakService.addUser(username, full_name, email, password)
+            //     .then(() => {
+            //         console.log('Add user done!')
+            //         let status = 1
+            //         changeRequestStatus(requestid, status)
+            //             .then(() => {
+            //                 console.log('Update user status done!')
+            //                 UserAccount.addUser(full_name, full_name, username, password, email)
+            //                 window.location.reload()
+            //             })
+            //             .catch(err => console.log(err))
 
-                })
-                .catch(err => console.log(err))
+            //     })
+            //     .catch(err => console.log(err))
+
+            console.log('a')
 
 
 
