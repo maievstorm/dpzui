@@ -16,7 +16,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
  
-import Pricing from "./Pricing";
+
 import Signup from "./Signup";
 import Footer from "./Footer";
  
@@ -110,7 +110,7 @@ function Welcome(props) {
         <Toolbar />
       </Box>
     </Box>
-    <Pricing></Pricing>
+ 
     <br></br>
   <Signup></Signup>
   <Footer></Footer>
