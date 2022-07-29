@@ -19,7 +19,7 @@ export default function LogInfo() {
     const getData = () => {
         DataIngest.getLoginfo(DagId)
             .then(res => {
-                setData(res.data.dag_runs.map(item => {
+                setData(res.data.dag_runs?.map(item => {
                     let start_date = new Date(Date.parse(item.start_date)).toLocaleString()
                     // let execution_date = new Date( Date.parse(item.execution_date) ).toLocaleString()
                     let end_date = new Date(Date.parse(item.end_date)).toLocaleString()
