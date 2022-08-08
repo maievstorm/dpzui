@@ -1,6 +1,6 @@
 {
     "name": "dpzui-react",
-    "version": "3.3.3",
+    "version": "4.0.0",
     "private": true,
     "dependencies": {
         "@emotion/cache": "^11.4.0",
