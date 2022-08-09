@@ -71,12 +71,15 @@ export default function AddInGroup({ dataGroup }) {
                 let user_group_id = subscriptionInfo
                 console.log(user_group_id, user_account_id, isAdmin)
                 addSubscription(user_group_id, user_account_id, isAdmin)
-                toast.success("Thêm user thành công!");
-
-                setTimeout(()=>{
-                    window.location.reload();
-
-                },1500)
+                    .then(res => {
+                        toast.success("Thêm user thành công!");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500)
+                    })
+                    .catch(err => {
+                        toast.error("Thêm user thất bại!");
+                    })
 
             })
             .catch(err => {
@@ -88,7 +91,7 @@ export default function AddInGroup({ dataGroup }) {
         <Box marginTop={5}>
 
             <Button variant="outlined" onClick={handleClickOpen}>
-                Add
+                Thêm tài khoản
             </Button>
 
 
@@ -108,9 +111,9 @@ export default function AddInGroup({ dataGroup }) {
                         columns={columns}
                         options={options}
                     /> */}
-                    <br></br>
+                        <br></br>
 
-                    <br></br>
+                        <br></br>
 
 
                         <FormControl fullWidth>

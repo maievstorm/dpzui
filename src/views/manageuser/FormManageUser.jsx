@@ -79,22 +79,41 @@ export default function FormManageUser() {
 
     const [dataGroup,setDataGroup] = useState([])
 
+    // const deleteSubscription = (selected) => {
+    //     let indexSelected = selected?.data.map(item => item.dataIndex)
+    //     let userInfor = users[indexSelected]
+    //     deleteInGroup(userInfor.user_group_id,userInfor.user_account_id)
+    //     .then(res=>{
+    //         toast.success("Xoá subscription thành công!");
+
+    //             setTimeout(()=>{
+    //                 window.location.reload();
+
+    //             },1500)
+    //         // console.log('delect')
+    //         // let data = users
+    //         // data.splice(indexSelected, 1)
+    //         // console.log(data)
+    //         // setUsers(data)
+    //         // console.log('delect123')
+    //     })
+    //     .catch(err=>{
+    //         toast.error("Có lỗi xảy ra!");
+    //     })
+        
+    // }
     const deleteSubscription = (selected) => {
-        let indexSelected = selected?.data.map(item => item.dataIndex)
+        let indexSelected = selected?.data[0].dataIndex
         let userInfor = users[indexSelected]
-        console.log(userInfor.user_group_id,userInfor.user_account_id)
         deleteInGroup(userInfor.user_group_id,userInfor.user_account_id)
         .then(res=>{
             toast.success("Xoá subscription thành công!");
-
-                setTimeout(()=>{
-                    window.location.reload();
-
-                },1500)
-
+            return true
         })
         .catch(err=>{
             toast.error("Có lỗi xảy ra!");
+            return false
+
         })
         
     }
@@ -105,18 +124,10 @@ export default function FormManageUser() {
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        customToolbarSelect: selectedRows => (
-            <Tooltip title="Xoá subscription">
-                <IconButton
-                    onClick={() => {
-                        deleteSubscription(selectedRows);
-                    }}
-                >
-                    <DeleteIcon />
-                </IconButton>
-
-            </Tooltip>
-        )
+        onRowsDelete:rowsDeleted=>{
+            console.log(rowsDeleted)
+            return deleteSubscription(rowsDeleted)
+        }
     };
 
     useEffect(() => {
