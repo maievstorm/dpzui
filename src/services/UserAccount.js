@@ -29,6 +29,20 @@ export const addUser = async (first_name, last_name, user_name, password, email)
         });
 }
 
+export const accountByUsername = async (user_name) => {
+    let response
+    const router = '/useraccount/accountbyusername'
+
+    return response = await BaseAxios({
+        method: 'get',
+        params: {
+            username: user_name
+        },
+        url: router,
+        headers: { "Authorization": `Bearer ${UserService.getToken()}` },
+    })
+}
+
 const UserAccount = {
     addUser,
 };
