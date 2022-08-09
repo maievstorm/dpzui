@@ -8,9 +8,16 @@ import MainCard from 'ui-component/cards/MainCard';
 
 const Datavisualpage = () => (
     <MainCard title="Trực quan dữ liệu">
-        <Typography variant="body2">
-            abc
-        </Typography>
+  
+        <iframe
+            width="1600"
+            height="1600"
+            seamless
+            frameBorder="0"
+            scrolling="yes"
+            src="http://dpadv.apps.xplat.fis.com.vn/superset/dashboard/p/X3V5XG6xLqg"
+        >
+        </iframe>
     </MainCard>
 );
 
