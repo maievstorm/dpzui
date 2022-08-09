@@ -1,5 +1,5 @@
 // assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill,IconNotebook,IconListCheck  ,IconTextWrapDisabled } from '@tabler/icons';
+import { IconTypography, IconPalette, IconShadow, IconWindmill,IconNotebook,IconListCheck  ,IconTextWrapDisabled,IconBrandAsana  } from '@tabler/icons';
 
  
 // constant
@@ -10,7 +10,8 @@ const icons = {
     IconWindmill,
     IconNotebook,
     IconListCheck,
-    IconTextWrapDisabled
+    IconTextWrapDisabled,
+    IconBrandAsana 
 };
 
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
@@ -26,6 +27,14 @@ const registerService = {
             type: 'item',
             url: '/mysubscription',
             icon: icons.IconListCheck,
+            breadcrumbs: true
+        },
+        {
+            id: 'manage-user',
+            title: 'Quản lý tài khoản',
+            type: 'item',
+            url: '/manageuser',
+            icon: icons.IconBrandAsana,
             breadcrumbs: true
         },
         {
