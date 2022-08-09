@@ -1,5 +1,5 @@
 // assets
-import { IconKey,IconTypography,IconBrandCodepen,IconDatabaseImport,IconCloud,IconDiamond } from '@tabler/icons';
+import { IconKey, IconTypography, IconBrandCodepen, IconDatabaseImport, IconCloud, IconDiamond } from '@tabler/icons';
 
 // constant
 const icons = {
@@ -9,7 +9,7 @@ const icons = {
     IconDatabaseImport,
     IconCloud,
     IconDiamond
-    
+
 };
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
@@ -46,11 +46,13 @@ const pages = {
                     id: 'datavisualize',
                     title: 'Trực quan dữ liệu',
                     type: 'item',
-                    url: '/datavisual',
-                    breadcrumbs: true
+                    url: 'http://dpadv.apps.xplat.fis.com.vn',
+                    breadcrumbs: false,
+                    external: true,
+                    target: true
                 }
             ]
-        }, 
+        },
         {
             id: 'dataingest',
             title: 'Tích hợp',
@@ -83,7 +85,7 @@ const pages = {
             ]
         }
         ,
-         {
+        {
             id: 'dataplatform',
             title: 'Nền tảng',
             type: 'collapse',
@@ -114,7 +116,7 @@ const pages = {
                 }
             ]
         }
-        
+
     ]
 };
 
