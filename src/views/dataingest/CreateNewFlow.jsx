@@ -14,7 +14,8 @@ import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DataIngest from "services/DataIngest";
 import { addLog } from "services/LogService";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -109,13 +110,18 @@ const CreateNewFlow = () => {
           DataIngest.CreateInvoiceProcess(invoicebody);
           addLog('create_flow',invoicebody)
             .then(res => {
+              toast.success("Thêm tiến trình thành công!");
+
               setTimeout(() => {
                 setLoading(false)
                 navigate('/dataingest')
-              }, 5000);
+              }, 3000);
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+              toast.error("Thêm tiến trình thất bại!");
+              console.log(err)
+            })
         }
       })
       .catch(err => console.log(err))
@@ -152,6 +158,7 @@ const CreateNewFlow = () => {
         <Review userCallback={submit} conf={conf} />
         <Finish loading={loading} setLoading={setLoading} />
       </StepWizard>
+      <ToastContainer/>
     </MainCard>
   );
 };

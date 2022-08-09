@@ -10,35 +10,33 @@ export const Finish = (props) => {
   //console.log(props.loading)
   const timerRef = React.useRef();
 
-  useEffect(
-    () => () => {
-      clearTimeout(timerRef.current);
-    },
-    [],
-  );
+  useEffect(() => () => {
+    clearTimeout(timerRef.current);
+  },
+    []);
 
   // const handleClickLoading = () => {
   //   props.setLoading((prevLoading) => !prevLoading);
   // };
 
-  
+
   return (
     <div style={{ marginTop: "1rem" }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop:'80px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '80px' }}>
         <Box sx={{ height: 80 }}>
           <Fade
             in={loading}
             style={{
               transitionDelay: loading ? '800ms' : '0ms',
-              width:'50px',
-              height:'50px',
-              color:'red'
+              width: '50px',
+              height: '50px',
+              color: 'red'
             }}
             unmountOnExit
           >
             <CircularProgress />
           </Fade>
-          
+
         </Box>
         {/* <Button onClick={handleClickLoading} sx={{ m: 2 }}>
           {loading ? 'Stop loading' : 'Loading'}
