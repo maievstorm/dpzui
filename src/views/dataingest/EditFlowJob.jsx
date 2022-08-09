@@ -17,6 +17,8 @@ import { addLog } from "services/LogService";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -207,9 +209,20 @@ export default function EditFlowJob() {
                 if (res.status === 200) {
                     DataIngest.UpdateInvoiceProcess(confInfo.DagId, data);
                     addLog('edit_flow', data)
+                    toast.success("Lưu thành công!");
 
-                    navigate('/dataingest/', { state: { id: DagId } })
+                    setTimeout(()=>{
+                        navigate('/dataingest/', { state: { id: DagId } })
+    
+                    },1500)
+
+
                 }
+            })
+            .catch(err=>{
+                console.log(err)
+                toast.error("Lưu thất bại!");
+
             })
 
 
@@ -323,6 +336,7 @@ export default function EditFlowJob() {
                     />
                 </Box>
             </Box>
+            <ToastContainer/>
         </MainCard>
 
     )

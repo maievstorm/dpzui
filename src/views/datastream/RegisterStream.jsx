@@ -10,7 +10,8 @@ import UserService from 'services/UserService';
 import { getSubcription, CreateInvoiceProcess } from 'services/DataIngest';
 import MainCard from 'ui-component/cards/MainCard';
 //import { getSubcription,createKafkaConnector, CreateInvoiceProcess, GetKafkaConnectors } from 'services/DataIngest';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { createKafkaConnector, GetKafkaConnectors } from 'services/KafkaConnect';
 
 
@@ -283,6 +284,7 @@ const RegisterStreaming = () => {
         const inputString = JSON.stringify(stream);
         var jsonInput = JSON.parse(inputString);
 
+
         var sourcePayLoadData = toSourcePayload(Streamsource, nameProgress);
         var sinkPayLoadData = toSinkPayload(Streamsource, Streamtarget);
         //console.log(sourcePayLoadData);
@@ -308,17 +310,27 @@ const RegisterStreaming = () => {
             "invoice_due_ts": new Date().toLocaleString() + '',
             "invoice_paid_ts": new Date().toLocaleString() + ''
         }
-        
+
 
         console.log('sourcePayLoadData', sourcePayLoadData);
         console.log('Start create source connector.')
-        createKafkaConnector(sourcePayLoadData);
+        try {
 
-        console.log('sinkPayLoadData', sinkPayLoadData);
-        console.log('Start create sink connector.')
-        createKafkaConnector(sinkPayLoadData);
 
-        CreateInvoiceProcess(invoicebody);
+            createKafkaConnector(sourcePayLoadData);
+
+            console.log('sinkPayLoadData', sinkPayLoadData);
+            console.log('Start create sink connector.')
+            createKafkaConnector(sinkPayLoadData);
+
+            CreateInvoiceProcess(invoicebody);
+            toast.success("Thêm tiến trình thành công!");
+        }
+        catch (error) {
+            console.log(error)
+            toast.error("Thêm tiến trình thất bại!");
+
+        }
         // createKafkaConnector(sourcePayLoadData).then(res => {
         //     if (res.status === 200) {
         //         console.log('Created source connector successfully.');
@@ -592,6 +604,7 @@ const RegisterStreaming = () => {
                 </Grid>
                 <Button onClick={submit}>Tạo Tiến Trình</Button>
             </Box>
+            <ToastContainer/>
 
         </MainCard>
     )
