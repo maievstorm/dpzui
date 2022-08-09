@@ -6,7 +6,10 @@ import { Tooltip, IconButton } from '@mui/material';
 import AddInGroup from './AddInGroup';
 import { deleteInGroup } from "services/InGroupService";
 import { ToastContainer, toast } from 'react-toastify';
+import RequestSub from "./RequestSub";
 import 'react-toastify/dist/ReactToastify.css';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 
 export default function FormManageUser() {
@@ -48,7 +51,7 @@ export default function FormManageUser() {
 
     // const columns = ["id", "user_account_id", "user_name", "customer_invoice_data", "group_admin", "time_added", "time_removed", "user_group_id"];
 
-    const [dataGroup,setDataGroup] = useState([])
+    const [dataGroup, setDataGroup] = useState([])
 
     // const deleteSubscription = (selected) => {
     //     let indexSelected = selected?.data.map(item => item.dataIndex)
@@ -71,22 +74,22 @@ export default function FormManageUser() {
     //     .catch(err=>{
     //         toast.error("Có lỗi xảy ra!");
     //     })
-        
+
     // }
     const deleteSubscription = (selected) => {
         let indexSelected = selected?.data[0].dataIndex
         let userInfor = users[indexSelected]
-        deleteInGroup(userInfor.user_group_id,userInfor.user_account_id)
-        .then(res=>{
-            toast.success("Xoá subscription thành công!");
-            return true
-        })
-        .catch(err=>{
-            toast.error("Có lỗi xảy ra!");
-            return false
+        deleteInGroup(userInfor.user_group_id, userInfor.user_account_id)
+            .then(res => {
+                toast.success("Xoá subscription thành công!");
+                return true
+            })
+            .catch(err => {
+                toast.error("Có lỗi xảy ra!");
+                return false
 
-        })
-        
+            })
+
     }
 
     const options = {
@@ -95,7 +98,7 @@ export default function FormManageUser() {
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        onRowsDelete:rowsDeleted=>{
+        onRowsDelete: rowsDeleted => {
             console.log(rowsDeleted)
             return deleteSubscription(rowsDeleted)
         }
@@ -110,16 +113,16 @@ export default function FormManageUser() {
                 let initDataGroup = []
                 for (var i = 0; i < data.length; i++) {
                     var dTime = new Date(data[i]?.time_added).toLocaleString();
-                    let localTime = dTime === '1/1/1970, 8:00:00 AM'? 'null':dTime
+                    let localTime = dTime === '1/1/1970, 8:00:00 AM' ? 'null' : dTime
                     data[i].time_added = localTime;
 
 
 
                     var dTime = new Date(data[i]?.time_removed).toLocaleString();
-                    data[i].time_removed = dTime === '1/1/1970, 8:00:00 AM'? 'null':dTime
-                    let isAdmin = data[i].group_admin === true? 'true':'false'
+                    data[i].time_removed = dTime === '1/1/1970, 8:00:00 AM' ? 'null' : dTime
+                    let isAdmin = data[i].group_admin === true ? 'true' : 'false'
                     data[i].group_admin = isAdmin
-                    initDataGroup.push([data[i].user_group_id,data[i].customer_invoice_data])
+                    initDataGroup.push([data[i].user_group_id, data[i].customer_invoice_data])
                 }
                 setUsers(data)
                 let stringArray = initDataGroup.map(JSON.stringify);
@@ -133,20 +136,27 @@ export default function FormManageUser() {
             })
     }, [])
 
-    
 
-    
+
+
     return (
-        <>
+        <Box>
             <MUIDataTable
                 title={'Danh sách người dùng'}
                 data={users}
                 columns={columns}
                 options={options}
             />
-            <AddInGroup dataGroup = {dataGroup}/>
-            <ToastContainer/>
-        </>
+            <Stack
+                direction={{ xs: 'column', sm: 'row' }}
+                // spacing={{ xs: 2, sm: 2, md: 4 }}
+                // spacing={2}
+            >
+                <AddInGroup dataGroup={dataGroup} />
+                <RequestSub dataGroup={dataGroup} />
+            </Stack>
+            <ToastContainer />
+        </Box>
 
     )
 }
