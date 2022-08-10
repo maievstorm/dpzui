@@ -2,7 +2,6 @@
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import FormManageUser from './FormManageUser';
-import AddInGroup from './AddInGroup';
 // ==============================|| Bigdata Page ||============================== //
 
 const ManageUser = () => (

@@ -1,6 +1,5 @@
-import { FormControl, TextField, Stack, Button } from '@mui/material';
+import { FormControl, TextField,  Button } from '@mui/material';
 import {  Box } from '@mui/material';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -57,18 +56,18 @@ export default function AddInGroup({ dataGroup }) {
                 console.log(user_group_id, user_account_id, isAdmin)
                 addSubscription(user_group_id, user_account_id, isAdmin)
                     .then(res => {
-                        toast.success("Thêm user thành công!");
+                        toast.success("Thêm tài khoản thành công!");
                         setTimeout(() => {
                             window.location.reload();
                         }, 1500)
                     })
                     .catch(err => {
-                        toast.error("Thêm user thất bại!");
+                        toast.error("Thêm tài khoản thất bại!");
                     })
 
             })
             .catch(err => {
-                toast.error("Username invalid!");
+                toast.error("Tài khoản không tồn tại!");
             })
     };
 
