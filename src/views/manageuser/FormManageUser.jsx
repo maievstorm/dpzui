@@ -33,7 +33,7 @@ export default function FormManageUser() {
         setNewPassword(value);
     }
 
-    console.log(users)
+ 
 
 
 
@@ -118,7 +118,7 @@ export default function FormManageUser() {
         let username = userSelected.user_name
         let email = userSelected.email
 
-        console.log(username, email)
+      console.log(1)
         getUserInfor(username, email)
             .then(res => {
                 if (res.status === 401) {
