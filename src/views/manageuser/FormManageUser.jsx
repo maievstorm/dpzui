@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getUserSubscription } from "services/SubscriptionService"
 import MUIDataTable from "mui-datatables"
 import DeleteIcon from '@mui/icons-material/Delete';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { Tooltip, IconButton } from '@mui/material';
 import AddInGroup from './AddInGroup';
 import { deleteInGroup } from "services/InGroupService";
@@ -180,7 +180,7 @@ export default function FormManageUser() {
                     <IconButton
                         onClick={handleClickOpen}
                     >
-                        <SettingsSuggestIcon />
+                        <VpnKeyIcon />
                     </IconButton>
 
                 </Tooltip>
