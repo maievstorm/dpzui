@@ -76,7 +76,7 @@ export default function AddInGroup({ dataGroup }) {
         <Box marginTop={5}>
 
             <Button variant="outlined" onClick={handleClickOpen}>
-                Thêm tài khoản
+                Gán quyền
             </Button>
 
 
