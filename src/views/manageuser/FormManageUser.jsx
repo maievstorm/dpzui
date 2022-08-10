@@ -16,25 +16,11 @@ export default function FormManageUser() {
 
     const columns = [
         {
-            name: "id",
-            options: {
-                filter: true
-            },
-            label: 'Id'
-        },
-        {
-            name: "user_account_id",
-            options: {
-                filter: true
-            },
-            label: 'User account id',
-        },
-        {
             name: "user_name",
             options: {
                 filter: true
             },
-            label: 'User name'
+            label: 'Tài Khoản'
         }
         ,
         {
@@ -46,32 +32,17 @@ export default function FormManageUser() {
         },
         {
             name: "group_admin",
-            options: {
-                filter: true
-            },
-            label: 'Group admin'
+            
+            label: 'Quản trị'
         },
         {
             name: "time_added",
             options: {
                 filter: true
             },
-            label: 'Thời gian thêm'
-        },
-        {
-            name: "time_removed",
-            options: {
-                filter: true
-            },
-            label: 'Thời gian xoá'
-        },
-        {
-            name: "user_group_id",
-            options: {
-                filter: true
-            },
-            label: 'User group id'
+            label: 'Ngày tạo'
         }
+       
 
     ];
 
@@ -168,7 +139,7 @@ export default function FormManageUser() {
     return (
         <>
             <MUIDataTable
-                title={'Thông tin yêu cầu đăng kí'}
+                title={'Danh sách người dùng'}
                 data={users}
                 columns={columns}
                 options={options}

@@ -61,9 +61,7 @@ const Dashboard = () => {
             }).catch(err => { console.log(err) })
     }, []);
 
-    console.log(datauseage)
-
-
+  
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>

@@ -1,12 +1,8 @@
 import { FormControl, TextField, Stack, Button } from '@mui/material';
-import MUIDataTable from "mui-datatables"
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Tooltip, IconButton, Box } from '@mui/material';
+import {  Box } from '@mui/material';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import { accountByUsername } from 'services/UserAccount';
@@ -36,17 +32,6 @@ export default function AddInGroup({ dataGroup }) {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-
-    // const options = {
-    //     filter: false,
-    //     print: false,
-    //     selectableRows: "single",
-    //     responsive: "standard",
-    //     textLabels: {},
-    //     customToolbarSelect: selectedRows => {
-    //         setSubscriptionInfo(dataGroup[selectedRows.data[0].dataIndex])
-    //     }
-    // };
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
