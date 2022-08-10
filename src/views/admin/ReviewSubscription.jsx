@@ -186,7 +186,7 @@ export default function ReviewSubscription() {
             const bodycreate = {
 
                 "user_group_type_id": 10,
-                "customer_invoice_data": username + ' request ' + requestid,
+                "customer_invoice_data": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' +requestid,
                 "insert_ts": new Date().toLocaleString() + '',
                 "account_id": account_id,
                 "ingroup": ingroup,

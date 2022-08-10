@@ -1,7 +1,6 @@
 import BaseAxios from "./BaseAxios";
 import UserService from "./UserService";
-import axios from "axios";
-import { TrendingUpTwoTone } from "@material-ui/icons";
+
 
 export const addSubscription = async (user_group_id, user_account_id, isAdmin) => {
     let response
