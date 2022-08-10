@@ -23,7 +23,7 @@ const registerService = {
     children: [
         {
             id: 'mysubscription',
-            title: 'Tài nguyên',
+            title: 'Tài nguyên sử dụng',
             type: 'item',
             url: '/mysubscription',
             icon: icons.IconListCheck,
@@ -39,7 +39,7 @@ const registerService = {
         },
         {
             id: 'util-typography',
-            title: 'Đăng ký',
+            title: 'Đăng ký tài nguyên',
             type: 'item',
             url: '/registerservice',
             icon: icons.IconTextWrapDisabled,
