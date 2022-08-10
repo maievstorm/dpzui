@@ -118,11 +118,14 @@ export default function FormManageUser() {
         let username = userSelected.user_name
         let email = userSelected.email
 
-        console.log(username,email)
+        console.log(username, email)
         getUserInfor(username, email)
             .then(res => {
-                console.log()
-                if (res.data.data.length > 0) {
+                if (res.status === 401) {
+                    toast.error('Phiên làm việc không còn hiệu lực!')
+
+                }
+                else if (res.data.data.length > 0) {
                     let userId = res.data.data[0].id
                     return userId
                 }
@@ -134,21 +137,28 @@ export default function FormManageUser() {
                 if (userId !== undefined) {
                     resetPassword(userId, newPassword)
                         .then(res => {
-                            toast.success('Cập nhật mật khẩu thành công!')
+                            if (res.status === 401) {
+                                toast.error('Phiên làm việc không còn hiệu lực!')
+                            }
+                            else {
+                                toast.success('Cập nhật mật khẩu thành công!')
+                                setTimeout(() => {
+                                    handleClose()
+                                }, 1500)
 
-                            setTimeout(()=>{
-                                handleClose()
+                            }
 
-                            },1500)
                         })
                         .catch(err => {
                             toast.error('Cập nhật mật khẩu thất bại!')
 
                         })
                 }
+                else {
+                    toast.error('Không tìm thấy tài khoản!')
+                }
             })
             .catch(err => {
-                console.log(err)
                 toast.error('Thông tin tài khoản không hợp lệ!')
 
             })
@@ -257,9 +267,9 @@ export default function FormManageUser() {
                     <br></br>
 
                     <DialogActions>
-                    <Button onClick={handleClose}>Huỷ</Button>
+                        <Button onClick={handleClose}>Huỷ</Button>
                         <Button onClick={handleResetPassword}>Xác nhận</Button>
-  
+
                     </DialogActions>
                 </Box>
             </Dialog>
