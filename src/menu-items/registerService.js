@@ -38,7 +38,7 @@ const registerService = {
             breadcrumbs: true
         },
         {
-            id: 'util-typography',
+            id: 'regsubscription',
             title: 'Đăng ký tài nguyên',
             type: 'item',
             url: '/registerservice',
