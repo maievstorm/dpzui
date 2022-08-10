@@ -65,7 +65,6 @@ export default function RequestSub() {
         });
     }
 
-    console.log(userInfo)
 
     return (
         <Box marginTop={5} marginLeft={5}>

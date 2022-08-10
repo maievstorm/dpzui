@@ -2,19 +2,39 @@ import { useEffect, useState } from "react"
 import { getUserSubscription } from "services/SubscriptionService"
 import MUIDataTable from "mui-datatables"
 import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import { Tooltip, IconButton } from '@mui/material';
 import AddInGroup from './AddInGroup';
 import { deleteInGroup } from "services/InGroupService";
 import { ToastContainer, toast } from 'react-toastify';
 import RequestSub from "./RequestSub";
 import 'react-toastify/dist/ReactToastify.css';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
+import { getUserInfor, resetPassword } from "services/KeycloakService";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+
+import {
+    TextField,
+    Button,
+    Box,
+    Stack
+} from '@mui/material';
 
 
 export default function FormManageUser() {
 
     const [users, setUsers] = useState([])
+
+    const [newPassword, setNewPassword] = useState('')
+
+    const handleTypeInput = (evt) => {
+        const value = evt.target.value;
+        setNewPassword(value);
+    }
+
+    console.log(users)
+
 
 
     const columns = [
@@ -24,6 +44,13 @@ export default function FormManageUser() {
                 filter: true
             },
             label: 'Tài Khoản'
+        },
+        {
+            name: "email",
+            options: {
+                filter: true
+            },
+            label: 'Email'
         }
         ,
         {
@@ -35,7 +62,7 @@ export default function FormManageUser() {
         },
         {
             name: "group_admin",
-            
+
             label: 'Quản trị'
         },
         {
@@ -45,51 +72,86 @@ export default function FormManageUser() {
             },
             label: 'Ngày tạo'
         }
-       
+
 
     ];
 
-    // const columns = ["id", "user_account_id", "user_name", "customer_invoice_data", "group_admin", "time_added", "time_removed", "user_group_id"];
 
     const [dataGroup, setDataGroup] = useState([])
+    const [open, setOpen] = useState(false);
 
-    // const deleteSubscription = (selected) => {
-    //     let indexSelected = selected?.data.map(item => item.dataIndex)
-    //     let userInfor = users[indexSelected]
-    //     deleteInGroup(userInfor.user_group_id,userInfor.user_account_id)
-    //     .then(res=>{
-    //         toast.success("Xoá subscription thành công!");
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-    //             setTimeout(()=>{
-    //                 window.location.reload();
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-    //             },1500)
-    //         // console.log('delect')
-    //         // let data = users
-    //         // data.splice(indexSelected, 1)
-    //         // console.log(data)
-    //         // setUsers(data)
-    //         // console.log('delect123')
-    //     })
-    //     .catch(err=>{
-    //         toast.error("Có lỗi xảy ra!");
-    //     })
 
-    // }
     const deleteSubscription = (selected) => {
         let indexSelected = selected?.data[0].dataIndex
         let userInfor = users[indexSelected]
         deleteInGroup(userInfor.user_group_id, userInfor.user_account_id)
             .then(res => {
                 toast.success("Xoá subscription thành công!");
+                setTimeout(() => {
+                    users.splice(indexSelected, 1)
+                    setUsers(users)
+                    seRowsSelected([])
+
+                }, 500)
                 return true
             })
             .catch(err => {
                 toast.error("Có lỗi xảy ra!");
                 return false
-
             })
 
+    }
+
+    const [rowsSelected, seRowsSelected] = useState([])
+
+
+    const handleResetPassword = () => {
+        let userSelected = users[rowsSelected]
+        let username = userSelected.user_name
+        let email = userSelected.email
+
+        console.log(username,email)
+        getUserInfor(username, email)
+            .then(res => {
+                console.log()
+                if (res.data.data.length > 0) {
+                    let userId = res.data.data[0].id
+                    return userId
+                }
+                else {
+                    return;
+                }
+            })
+            .then(userId => {
+                if (userId !== undefined) {
+                    resetPassword(userId, newPassword)
+                        .then(res => {
+                            toast.success('Cập nhật mật khẩu thành công!')
+
+                            setTimeout(()=>{
+                                handleClose()
+
+                            },1500)
+                        })
+                        .catch(err => {
+                            toast.error('Cập nhật mật khẩu thất bại!')
+
+                        })
+                }
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error('Thông tin tài khoản không hợp lệ!')
+
+            })
     }
 
     const options = {
@@ -98,10 +160,36 @@ export default function FormManageUser() {
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        onRowsDelete: rowsDeleted => {
-            console.log(rowsDeleted)
-            return deleteSubscription(rowsDeleted)
-        }
+        rowsSelected: rowsSelected,
+        onRowSelectionChange: (rowsSelectedData, allRows, rowsSelected) => {
+            seRowsSelected(rowsSelected);
+        },
+        customToolbarSelect: selectedRows => (
+            <>
+                <Tooltip title="Đổi mật khẩu">
+                    <IconButton
+                        onClick={handleClickOpen}
+                    >
+                        <SettingsSuggestIcon />
+                    </IconButton>
+
+                </Tooltip>
+                <Tooltip title="delete">
+                    <IconButton
+                        onClick={() => {
+                            deleteSubscription(selectedRows);
+                        }}
+
+
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+
+                </Tooltip>
+
+            </>
+
+        )
     };
 
     useEffect(() => {
@@ -149,12 +237,32 @@ export default function FormManageUser() {
             />
             <Stack
                 direction={{ xs: 'column', sm: 'row' }}
-                // spacing={{ xs: 2, sm: 2, md: 4 }}
-                // spacing={2}
+            // spacing={{ xs: 2, sm: 2, md: 4 }}
+            // spacing={2}
             >
                 <AddInGroup dataGroup={dataGroup} />
                 <RequestSub dataGroup={dataGroup} />
             </Stack>
+            <Dialog open={open}
+                onClose={handleClose} fullWidth={true}
+                maxWidth={'sm'}
+            >
+                <DialogTitle>Cập nhật mật khẩu</DialogTitle>
+                <Box marginLeft={10} marginRight={10} marginTop={5} >
+                    <Stack spacing={2}>
+                        <TextField label="Mật khẩu mới" name='newPassword' type='password' onChange={handleTypeInput}></TextField>
+
+                    </Stack>
+                    <br></br>
+                    <br></br>
+
+                    <DialogActions>
+                    <Button onClick={handleClose}>Huỷ</Button>
+                        <Button onClick={handleResetPassword}>Xác nhận</Button>
+  
+                    </DialogActions>
+                </Box>
+            </Dialog>
             <ToastContainer />
         </Box>
 
