@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { getUserSubscription } from "services/SubscriptionService"
 import MUIDataTable from "mui-datatables"
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Tooltip, IconButton } from '@mui/material';
 import AddInGroup from './AddInGroup';
 import { deleteInGroup } from "services/InGroupService";
 import { ToastContainer, toast } from 'react-toastify';
@@ -49,8 +47,7 @@ export default function FormManageUser() {
 
     ];
 
-    // const columns = ["id", "user_account_id", "user_name", "customer_invoice_data", "group_admin", "time_added", "time_removed", "user_group_id"];
-
+   
     const [dataGroup, setDataGroup] = useState([])
 
     // const deleteSubscription = (selected) => {
@@ -81,7 +78,7 @@ export default function FormManageUser() {
         let userInfor = users[indexSelected]
         deleteInGroup(userInfor.user_group_id, userInfor.user_account_id)
             .then(res => {
-                toast.success("Xoá subscription thành công!");
+                toast.success("Xoá tài khoản thành công!");
                 return true
             })
             .catch(err => {
