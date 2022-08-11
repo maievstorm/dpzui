@@ -68,7 +68,10 @@ const getUserinfo = async () => {
   try {
     response = await BaseAxios({
       method: 'get',
-      url: '/useraccount/accountbyusername/' + UserService.getUsername(),
+      params: {
+        username: UserService.getUsername()
+      },
+      url: '/useraccount/accountbyusername',
       headers: { "Authorization": `Bearer ${UserService.getToken()}` },
     });
   } catch (err) {

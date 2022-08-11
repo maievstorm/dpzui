@@ -19,6 +19,8 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { addLog } from "services/LogService";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 import {
     Paper,
@@ -217,14 +219,14 @@ export default function ReviewSubscription() {
 
                     const invoicebodybigdata =
                     {
-                        "item_name": username + 'bigdata' + res.data.subscription.id,
+                        "item_name": username + requestid + 'bigdata',
                         "item_type": 'bigdata',
                         "customer_invoice_data": JSON.stringify(bodybigdata),
                         "subscription_id": res.data.subscription.id,
                         "plan_history_id": current_plan_id,
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
-                        "invoice_description": username + 'bigdata' + res.data.subscription.id,
+                        "invoice_description": username + requestid + 'bigdata',
                         "invoice_amount": dataoffer['Dữ liệu lớn(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
@@ -233,14 +235,14 @@ export default function ReviewSubscription() {
 
                     const invoicebodystorage =
                     {
-                        "item_name": username + 'storage' + res.data.subscription.id,
+                        "item_name": username + requestid + 'storage',
                         "item_type": 'storage',
                         "customer_invoice_data": JSON.stringify(bodystorage),
                         "subscription_id": res.data.subscription.id,
                         "plan_history_id": current_plan_id,
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
-                        "invoice_description": username + 'storage' + res.data.subscription.id,
+                        "invoice_description": username + requestid + 'storage',
                         "invoice_amount": dataoffer['Lưu trữ đám mây(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
@@ -249,14 +251,14 @@ export default function ReviewSubscription() {
 
                     const invoicebodydwh =
                     {
-                        "item_name": username + 'dwh' + res.data.subscription.id,
+                        "item_name": username + requestid + 'dwh',
                         "item_type": 'dwh',
                         "customer_invoice_data": JSON.stringify(bodydwh),
                         "subscription_id": res.data.subscription.id,
                         "plan_history_id": current_plan_id,
                         "invoice_period_start_date": new Date().toLocaleString() + '',
                         "invoice_period_end_date": new Date().toLocaleString() + '',
-                        "invoice_description": username + 'dwh' + res.data.subscription.id,
+                        "invoice_description": username + requestid + 'dwh',
                         "invoice_amount": dataoffer['Kho dữ liệu(GB)'],
                         "invoice_created_ts": new Date().toLocaleString() + '',
                         "invoice_due_ts": new Date().toLocaleString() + '',
@@ -272,13 +274,14 @@ export default function ReviewSubscription() {
                             changeRequestStatus(requestid, status);
                         })
                         .catch(err => console.log(err))
-
+                    toast.success('Tạo tài nguyên thành công');
                     setTimeout(() => {
                         setLoading(false)
                     }, 5000);
 
                 })
                 .catch(err => {
+                    toast.success('Có lỗi xảy ra trong quá trình xử lý');
                     console.log(err)
 
                 })
@@ -447,7 +450,7 @@ export default function ReviewSubscription() {
                     </CardContent>
                 </Card>
 
-
+                <ToastContainer></ToastContainer>
 
             </Box>
 

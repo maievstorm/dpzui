@@ -72,8 +72,8 @@ export const CreateUserStoragePolicy = async (bucketName) => {
 
 
 export const CreateUserStorage = async (bucketName) => {
-    let akey = 'naQrl3yAjoue8o22'
-    let skey = 'A0d6ZmTAbcVrhgTorNzCFBddtAWUjruP'
+    let akey = 'Ej29ZaoazKZujZvN'
+    let skey = 'OxUATEIBt5RP1SKZoUQfqbu7riAqseS2'
     DpzStorageConf(akey, skey)
         .then(StoreConf => {
             StoreConf.bucketExists(bucketName)

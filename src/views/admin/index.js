@@ -9,7 +9,7 @@ const AdminPage = () => (
 
     <div>
       
-        <RenderOnRole roles={['admin']}>
+        <RenderOnRole roles={['Admin']}>
             <ManageSubscription/>
            
         </RenderOnRole>
