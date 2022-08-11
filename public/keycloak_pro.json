@@ -4,5 +4,6 @@
   "ssl-required": "external",
   "resource": "local_dpz",
   "public-client": true,
-  "confidential-port": 0
+  "confidential-port": 0,
+  "abc":1
 }
