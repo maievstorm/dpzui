@@ -45,7 +45,7 @@ export default function ReviewSubscription() {
     const current_plan_id = location?.state?.current_plan_id;
     const request_type = location?.state?.request_type;
     const requeststatus = location?.state?.request_status;
-    console.log(requeststatus)
+  
     const [OfferSelected, setOfferSelected] = useState([])
     const [rows, setRows] = useState([])
     const [dataoffer, setdataoffer] = useState([])
