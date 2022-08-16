@@ -1,9 +1,13 @@
+import { ContactSupportOutlined } from "@material-ui/icons";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const useRecorder = () => {
   const [audioURL, setAudioURL] = useState("");
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState(null);
+  const [songdata, setSongdata] = useState(null);
+  
 
   useEffect(() => {
     // Lazily obtain recorder first time we're recording.
@@ -24,6 +28,30 @@ const useRecorder = () => {
     // Obtain the audio when ready.
     const handleData = e => {
       setAudioURL(URL.createObjectURL(e.data));
+      console.log(e.data)
+      setSongdata(e.data);
+      const blob = new Blob(e.data, { 
+        'type': 'audio/mp3' 
+      });
+
+
+      const routeUpload = 'https://musicrec.apps.xplat.fis.com.vn/upload_image/?is_save=1';
+
+      axios.post(routeUpload, blob,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data.results)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+
+     
+       
     };
 
     recorder.addEventListener("dataavailable", handleData);
@@ -36,9 +64,10 @@ const useRecorder = () => {
 
   const stopRecording = () => {
     setIsRecording(false);
+    console.log(songdata)
   };
 
-  return [audioURL, isRecording, startRecording, stopRecording];
+  return [songdata,audioURL, isRecording, startRecording, stopRecording];
 };
 
 async function requestRecorder() {
