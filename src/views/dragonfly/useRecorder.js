@@ -7,6 +7,8 @@ const useRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [recorder, setRecorder] = useState(null);
   const [songdata, setSongdata] = useState(null);
+  const [data2, setData2] = useState([]);
+
   
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const useRecorder = () => {
         })
         .then(res => {
           console.log(res.data.results)
+          setData2(res.data.results)
         })
         .catch((err) => {
           console.log(err);
@@ -74,7 +77,7 @@ const useRecorder = () => {
     console.log(songdata)
   };
 
-  return [songdata,audioURL, isRecording, startRecording, stopRecording];
+  return [songdata,audioURL, isRecording, startRecording, stopRecording,data2];
 };
 
 async function requestRecorder() {
