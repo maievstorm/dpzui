@@ -57,7 +57,7 @@ function SongIdentifi() {
   const submit = () => {
     setLoading(true)
 
-    const routeUpload = 'http://10.14.222.100:8080/upload_image/?is_save=1'
+    const routeUpload = 'http://10.14.222.100:8080/upload_image/?is_save=1&fast_check=1'
     var formFile = new FormData();
     formFile.append("file", file[0]);
     axios.post(routeUpload, formFile,
