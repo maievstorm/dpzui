@@ -27,17 +27,24 @@ const useRecorder = () => {
 
     // Obtain the audio when ready.
     const handleData = e => {
-      setAudioURL(URL.createObjectURL(e.data));
+      
       console.log(e.data)
       setSongdata(e.data);
-      const blob = new Blob(e.data, { 
-        'type': 'audio/mp3' 
+      const audioChunks = [];
+      audioChunks.push(e.data);
+      const mimeType = 'audio/mp3';
+      const filesong = new Blob(audioChunks, { 
+        'type': mimeType 
       });
-
+      console.log(filesong);
+      setAudioURL(URL.createObjectURL(filesong));
+      var formFile = new FormData();
+      formFile.append("file", filesong);
+      
 
       const routeUpload = 'https://musicrec.apps.xplat.fis.com.vn/upload_image/?is_save=1';
 
-      axios.post(routeUpload, blob,
+      axios.post(routeUpload, formFile,
         {
           headers: {
             'Content-Type': 'multipart/form-data'
