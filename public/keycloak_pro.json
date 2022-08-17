@@ -2,7 +2,7 @@
   "realm": "dpa",
   "auth-server-url": "https://sso-fis-mbf-dplat.apps.xplat.fis.com.vn/auth/",
   "ssl-required": "external",
-  "resource": "local_dpz",
+  "resource": "local_dpz_121",
   "public-client": true,
   "confidential-port": 0,
   "abc":1
