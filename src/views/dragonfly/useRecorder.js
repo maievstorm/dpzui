@@ -42,7 +42,7 @@ const useRecorder = () => {
       formFile.append("file", filesong);
       
 
-      const routeUpload = 'https://musicrec.apps.xplat.fis.com.vn/upload_image/?is_save=1';
+      const routeUpload = 'http://10.14.222.100:8080/upload_image/?is_save=1';
 
       axios.post(routeUpload, formFile,
         {
