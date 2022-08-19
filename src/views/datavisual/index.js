@@ -15,7 +15,7 @@ const Datavisualpage = () => (
             seamless
             frameBorder="0"
             scrolling="yes"
-            src="http://dpadv.apps.xplat.fis.com.vn/superset/dashboard/p/X3V5XG6xLqg"
+            src="http://dpadv.apps.xplat.fis.com.vn/superset/dashboard/p/MwaJ9E6lomP"
         >
         </iframe>
     </MainCard>
