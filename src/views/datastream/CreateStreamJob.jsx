@@ -4,16 +4,17 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { IconSquarePlus,IconCircleMinus} from '@tabler/icons'; 
+import { IconSquarePlus, IconCircleMinus } from '@tabler/icons';
 import axios from 'axios';
+
 
 function CreateStreamJob() {
     const [formSrcFields, setFormSrcFields] = useState([
         {
             sourcetype: '',
             connectstring: '',
-            srcusername:'',
-            srcpassword :'',
+            srcusername: '',
+            srcpassword: '',
             tablename: '',
             alias: ''
         },
@@ -73,11 +74,11 @@ function CreateStreamJob() {
             ]
         }
 
-        
-        const json = JSON.stringify({ "name": "SQLDBZtest", "config": { "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", "database.hostname": "10.15.10.135", "database.port": "1433", "database.user": "sa",  "database.password": "123456a@",  "database.dbname": "dpa", "database.server.name": "test", "table.include.list": "dbo.CARD_TRANSACTION", "database.history.kafka.bootstrap.servers": "kafkadpa-headless:9092" , "database.history.kafka.topic": "test_dbhistory", "decimal.handling.mode":"double", "time.precision.mode": "connect", "transforms": "route,unwrap", "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter", "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)", "transforms.route.replacement": "$3", "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState", "transforms.unwrap.drop.tombstones": "false" } });
+
+        const json = JSON.stringify({ "name": "SQLDBZtest", "config": { "connector.class": "io.debezium.connector.sqlserver.SqlServerConnector", "database.hostname": "10.15.10.135", "database.port": "1433", "database.user": "sa", "database.password": "123456a@", "database.dbname": "dpa", "database.server.name": "test", "table.include.list": "dbo.CARD_TRANSACTION", "database.history.kafka.bootstrap.servers": "kafkadpa-headless:9092", "database.history.kafka.topic": "test_dbhistory", "decimal.handling.mode": "double", "time.precision.mode": "connect", "transforms": "route,unwrap", "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter", "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)", "transforms.route.replacement": "$3", "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState", "transforms.unwrap.drop.tombstones": "false" } });
         console.log(json)
-        
-        const res =  axios.post('https://streamdpa.apps.xplat.fis.com.vn', json);
+
+        const res = axios.post('https://streamdpa.apps.xplat.fis.com.vn', json);
     }
 
     const addFields = () => {
@@ -96,7 +97,7 @@ function CreateStreamJob() {
         data.splice(index, 1)
         setFormSrcFields(data)
     }
-   
+
 
     const addFieldQuery = () => {
         let object = {
@@ -117,41 +118,41 @@ function CreateStreamJob() {
     }
     const datatypes = [
         {
-            key :'storage',
-            name : 'Lưu trữ đám mây'
+            key: 'storage',
+            name: 'Lưu trữ đám mây'
         },
         {
-            key :'dwh',
-            name : 'Kho dữ liệu'
+            key: 'dwh',
+            name: 'Kho dữ liệu'
         },
         {
-            key :'bigdata',
-            name : 'Dữ liệu lớn'
+            key: 'bigdata',
+            name: 'Dữ liệu lớn'
         }
         ,
         {
-            key :'mssql',
-            name : 'Microsof Sql, Azure SQL'
-        } ,
+            key: 'mssql',
+            name: 'Microsof Sql, Azure SQL'
+        },
         {
-            key :'oracle',
-            name : 'Oracle'
+            key: 'oracle',
+            name: 'Oracle'
         }
         ,
         {
-            key :'mysql',
-            name : 'MySQL'
+            key: 'mysql',
+            name: 'MySQL'
         }
         ,
         {
-            key :'postgres',
-            name : 'PostgresSQL'
+            key: 'postgres',
+            name: 'PostgresSQL'
         }
-        
+
 
     ]
 
-    
+
     const divStyle = {
         margin: '5px'
     };
@@ -160,12 +161,13 @@ function CreateStreamJob() {
     const MenuProps = {
         PaperProps: {
             style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
             },
         },
-        };
-  
+    };
+
+
 
 
     return (
@@ -217,29 +219,29 @@ function CreateStreamJob() {
             </Box>
             <div>
                 <p>
-                <strong>
-                    Đăng ký dữ liệu
-                </strong>
+                    <strong>
+                        Đăng ký dữ liệu
+                    </strong>
                 </p>
-               
+
                 <Box >
                     {formSrcFields.map((form, index) => {
                         return (
                             <div key={index}  >
-                               <strong>{index+1} </strong> 
+                                <strong>{index + 1} </strong>
                                 <Select name='sourcetype' value={form.sourcetype} onChange={event => handleFormSrcChange(event, index)}
-                                 size="small"
-                                 style={divStyle}
+                                    size="small"
+                                    style={divStyle}
                                 >
-                                   
-                                     {datatypes.map((datatype) => (
-                                            <MenuItem
+
+                                    {datatypes.map((datatype) => (
+                                        <MenuItem
                                             key={datatype.key}
                                             value={datatype.key}
-                                            >
+                                        >
                                             {datatype.name}
-                                            </MenuItem>
-                                        ))}
+                                        </MenuItem>
+                                    ))}
 
                                 </Select>
 
@@ -260,7 +262,7 @@ function CreateStreamJob() {
                                     value={form.srcusername}
                                     style={divStyle}
                                 />
-                                 <TextField
+                                <TextField
                                     name='srcpassword'
                                     size="small"
                                     label='Mật khẩu'
@@ -284,12 +286,12 @@ function CreateStreamJob() {
                                     value={form.alias}
                                     style={divStyle}
                                 />
-                                <Button style={divStyle} name="removesource" onClick={() => removeFields(index)}><IconCircleMinus/></Button>
+                                <Button style={divStyle} name="removesource" onClick={() => removeFields(index)}><IconCircleMinus /></Button>
                                 <br></br>
                             </div>
                         )
                     })}
-                    <Button style={divStyle} name = "addsoruce" onClick={addFields}><IconSquarePlus/></Button>
+                    <Button style={divStyle} name="addsoruce" onClick={addFields}><IconSquarePlus /></Button>
                 </Box>
                 <strong>
                     Đăng ký thủ tục truyền tải dữ liệu
@@ -298,7 +300,7 @@ function CreateStreamJob() {
                     {/* <input placeholder='Số query' onChange={e => addFieldQuery(e.target.value)}/> */}
                     {formQuery.map((formquery, index) => (
                         <div key={index} >
-                            <strong>{index+1} </strong> 
+                            <strong>{index + 1} </strong>
                             <div >
                                 {/* <strong>Query {index}</strong> */}
                                 <TextField
@@ -310,44 +312,44 @@ function CreateStreamJob() {
                                     onChange={event => handleformQuery(event, index)}
                                     style={divStyle}
                                 />
-                                 <br></br>
-                                 Bảng nguồn: 
-                                 <Select name='listsourcetable' 
-                                        value={formquery.listsourcetable}  
-                                        onChange={event => handleformQuery(event, index)}
-                                        size="small"
-                                        style={divStyle}
+                                <br></br>
+                                Bảng nguồn:
+                                <Select name='listsourcetable'
+                                    value={formquery.listsourcetable}
+                                    onChange={event => handleformQuery(event, index)}
+                                    size="small"
+                                    style={divStyle}
                                 >
-                                   
-                                     {formSrcFields.map((formSrcField) => (
-                                            <MenuItem
+
+                                    {formSrcFields.map((formSrcField) => (
+                                        <MenuItem
                                             key={formSrcField.alias}
                                             value={formSrcField.alias}
-                                            >
+                                        >
                                             {formSrcField.alias}
-                                            </MenuItem>
-                                        ))}
+                                        </MenuItem>
+                                    ))}
 
                                 </Select>
-                                 <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus/></Button>
-                                 <br></br>
-                               
+                                <Button name="btnremovequery" onClick={() => removeQuery(index)}><IconCircleMinus /></Button>
+                                <br></br>
+
                                 Bảng đích :
-                                <Select name='targettable' 
-                                        value={formquery.targettable}  
-                                        onChange={event => handleformQuery(event, index)}
-                                        size="small"
-                                        style={divStyle}
+                                <Select name='targettable'
+                                    value={formquery.targettable}
+                                    onChange={event => handleformQuery(event, index)}
+                                    size="small"
+                                    style={divStyle}
                                 >
-                                   
-                                     {formSrcFields.map((formSrcField) => (
-                                            <MenuItem
+
+                                    {formSrcFields.map((formSrcField) => (
+                                        <MenuItem
                                             key={formSrcField.alias}
                                             value={formSrcField.alias}
-                                            >
+                                        >
                                             {formSrcField.alias}
-                                            </MenuItem>
-                                        ))}
+                                        </MenuItem>
+                                    ))}
 
                                 </Select>
 
@@ -361,12 +363,12 @@ function CreateStreamJob() {
                                     style={divStyle}
                                 /> */}
                             </div>
-                          
+
                         </div>
-                        
+
                     ))
                     }
-                 
+
                 </div>
             </div>
             <br />
