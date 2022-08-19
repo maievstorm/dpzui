@@ -10,9 +10,9 @@ import MenuItem from '@mui/material/MenuItem';
 import UserService from "services/UserService";
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import DateFNSUtils from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DateTimePicker from '@material-ui/lab/DateTimePicker';
 import { processTime } from "./constant";
 export const Info = (props) => {
   const [dateValue, setDateValue] = React.useState(new Date('2014-08-18T21:11:54'));
@@ -159,7 +159,7 @@ export const Info = (props) => {
           </Select>
           <br></br>
         </FormControl>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={DateFNSUtils}>
           <DateTimePicker
             label="Lịch chay"
             name="schedule_interval"

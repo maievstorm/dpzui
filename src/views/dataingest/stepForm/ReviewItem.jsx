@@ -10,12 +10,12 @@ import Button from '@mui/material/Button';
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks";
 import UserService from "services/UserService";
 import config from "../../../config";
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import axios from "axios";
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import DateFNSUtils from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import DateTimePicker from '@material-ui/lab/DateTimePicker';
 import { processTime } from "./constant";
 
 
@@ -126,7 +126,7 @@ export default function ReviewItem(props) {
                     />
                 }
                 {
-                    !edit && <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    !edit && <LocalizationProvider dateAdapter={DateFNSUtils}>
                         <DateTimePicker
                             label="Lịch chay"
                             name="schedule_interval"
