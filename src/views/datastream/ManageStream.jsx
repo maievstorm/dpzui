@@ -73,7 +73,7 @@ export default function ManageStream() {
     return (
         <div>
             <Button onClick={onClickHandler} > {<AddIcon />} Tạo tiến trình</Button>
-            <Button   > {<ModeEditIcon />} Hiệu chỉnh</Button>
+            {/* <Button   > {<ModeEditIcon />} Hiệu chỉnh</Button> */}
 
             <MUIDataTable
                 title={"Danh sách tiến trình"}
