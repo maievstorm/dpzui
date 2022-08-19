@@ -13,7 +13,8 @@ import MainCard from 'ui-component/cards/MainCard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createKafkaConnector, GetKafkaConnectors } from 'services/KafkaConnect';
-
+import config from "../../config";
+import axios from 'axios';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -355,6 +356,22 @@ const RegisterStreaming = () => {
         //     } );
 
     }
+
+    const validate = () => {
+        const getairflowapi = config.rootapi + '/invoice/' + Streamsource.tentientrinh;
+        axios.get(getairflowapi)
+            .then(res => {
+                toast.error("Đã tồn tại tên tiến trình!");
+            })
+            .catch(err => {
+                if (!Streamsource.tentientrinh) toast.error("Tên tiến trình trống!");
+                else{
+                    submit()
+                }
+            })
+    };
+
+
     return (
         <MainCard>
             <Box sx={{ flexGrow: 1 }}>
@@ -602,9 +619,9 @@ const RegisterStreaming = () => {
 
 
                 </Grid>
-                <Button onClick={submit}>Tạo Tiến Trình</Button>
+                <Button onClick={validate}>Tạo Tiến Trình</Button>
             </Box>
-            <ToastContainer/>
+            <ToastContainer />
 
         </MainCard>
     )
