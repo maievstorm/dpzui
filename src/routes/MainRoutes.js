@@ -25,6 +25,8 @@ const Objectstorepage = Loadable(lazy(() => import('views/objectstore')));
 const Dataingestpage = Loadable(lazy(() => import('views/dataingest')));
 const Datastreampage = Loadable(lazy(() => import('views/datastream')));
 const Databackuppage = Loadable(lazy(() => import('views/databackup')));
+const CreateBackup = Loadable(lazy(() => import('views/databackup/CreateBackup')));
+
 const Dataaipage = Loadable(lazy(() => import('views/dataai')));
 const Financereportpage = Loadable(lazy(() => import('views/financereport')));
 const Datavisualpage = Loadable(lazy(() => import('views/datavisual')));
@@ -132,7 +134,11 @@ const MainRoutes = {
         {
             path: '/databackup',
             element: <Databackuppage />
-        } 
+        },
+        {
+            path: '/databackup/createbackup',
+            element: <CreateBackup />
+        } ,
         ,
         {
             path: '/dataai',
