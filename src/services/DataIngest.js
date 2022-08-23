@@ -7,17 +7,13 @@ import UserService from "./UserService";
 export const getSubcription = async () => {
     let response
     const router = '/subscription/subbyusername/' + UserService.getUsername();
-    try {
-        response = await BaseAxios({
+    return response = await BaseAxios({
             method: 'get',
             url: router,
             headers: { "Authorization": `Bearer ${UserService.getToken()}` },
             
         });
-    } catch (err) {
-        console.log(err);
-    }
-    return response
+    
 }
 
 
