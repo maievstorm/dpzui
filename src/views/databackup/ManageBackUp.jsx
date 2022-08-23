@@ -28,7 +28,7 @@ export default function ManageBackUp() {
             options: {
                 filter: true
             },
-            label: 'Tên tiến trình',
+            label: 'Tên backup',
         }
         ,
         
