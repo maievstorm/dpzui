@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { scheduletypes, writemodetype } from "./constant";
 import { datatypes } from "./constant";
 import { IconSquarePlus, IconCircleMinus } from '@tabler/icons'
-import Button from '@mui/material/Button';
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks";
 import UserService from "services/UserService";
 import config from "../../../config";
@@ -17,9 +16,12 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { processTime } from "./constant";
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+
 
 import {
-    Grid
+    Grid,
+    Button
 
 } from "@mui/material";
 
@@ -78,6 +80,23 @@ export default function ReviewItem(props) {
 
         }
     }
+
+    const [lvPassword, setLvPassword] = useState([])
+
+    const handleViewPassword = (index) => {
+        let value;
+        if (lvPassword[index] === undefined){
+            value = false
+        }
+        else{
+            value = !lvPassword[index]
+        }
+        setLvPassword({ ...lvPassword, [index]: value })
+    }
+
+    console.log(lvPassword)
+
+    console.log(lvPassword[0])
 
 
 
@@ -152,19 +171,19 @@ export default function ReviewItem(props) {
                         }
                         {
                             !edit && <>
-                            <br></br>
-                            <br></br>
+                                <br></br>
+                                <br></br>
 
 
-                            <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                <DateTimePicker
-                                    label="Lịch chay"
-                                    name="schedule_interval"
-                                    value={dateValue}
-                                    onChange={handleChange}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DateTimePicker
+                                        label="Lịch chay"
+                                        name="schedule_interval"
+                                        value={dateValue}
+                                        onChange={handleChange}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
                             </>
                         }
 
@@ -228,9 +247,9 @@ export default function ReviewItem(props) {
                                     headername={'Subscription id'}
                                 >
 
-                                    {subscription_id.map((scheduletype) => (
+                                    {subscription_id.map((scheduletype, index) => (
                                         <MenuItem
-                                            key={scheduletype.subscription_id}
+                                            key={index}
                                             value={scheduletype.subscription_id}
                                         >
                                             {scheduletype.subscription_id}
@@ -270,7 +289,7 @@ export default function ReviewItem(props) {
             <Box>
                 {
                     formSrcFields?.map((form, index) => (
-                        <Box sx={{ flexGrow: 1 }}>
+                        <Box sx={{ flexGrow: 1 }} key={index}>
                             <h2> <strong>Nguồn dữ liệu {index + 1} </strong><br></br></h2>
 
 
@@ -346,17 +365,22 @@ export default function ReviewItem(props) {
                                         variant="standard"
                                         focused
                                     />
-                                    <TextField
-                                        name='srcpassword'
-                                        label='Mật khẩu'
-                                        onChange={event => props.handleFormSrcChange(event, index)}
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        <TextField
+                                            name='srcpassword'
+                                            label='Mật khẩu'
+                                            type={(lvPassword[index] === true || lvPassword[index] === undefined) ? "password" : ''}
+                                            onChange={event => props.handleFormSrcChange(event, index)}
 
-                                        value={form.srcpassword}
-                                        InputProps={styles.InputProps}
-                                        InputLabelProps={styles.InputLabelProps}
-                                        fullWidth
-                                        variant="standard"
-                                        focused />
+                                            value={form.srcpassword}
+                                            InputProps={styles.InputProps}
+                                            InputLabelProps={styles.InputLabelProps}
+                                            variant="standard"
+                                            focused />
+                                        <Button onClick={() => handleViewPassword(index)}>
+                                            <RemoveRedEyeOutlinedIcon />
+                                        </Button>
+                                    </Box>
 
                                     <TextField
                                         name='alias'
@@ -426,7 +450,7 @@ export default function ReviewItem(props) {
                             <br></br>
                             <TextField
                                 label="Tên job tổng hợp"
-                                id="queryname"
+                                id={`queryname${index}`}
                                 name="queryname"
                                 value={formquery?.queryname}
                                 style={divStyle}
@@ -560,6 +584,6 @@ export default function ReviewItem(props) {
                 }
 
             </Box>
-        </div>
+        </div >
     )
 }

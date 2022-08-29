@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 //import { useState, useEffect } from 'react'
 import ActionButtons from "./ActionButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 
 import {
-  Stack,
-  Divider,
-  styled,
-  Paper,
-  Grid
+  Grid,
+  Button
 
 } from "@mui/material";
 
@@ -42,6 +40,21 @@ export const Review = (props) => {
 
     }
   }
+
+  const [lvPassword, setLvPassword] = useState([])
+
+  const handleViewPassword = (index) => {
+    let value;
+    if (lvPassword[index] === undefined) {
+      value = false
+    }
+    else {
+      value = !lvPassword[index]
+    }
+    setLvPassword({ ...lvPassword, [index]: value })
+  }
+
+
   return (
     <div style={{ marginTop: "1rem" }}>
       <h3>Thông số chi tiết tiến trình</h3>
@@ -185,7 +198,7 @@ export const Review = (props) => {
               </Grid>
 
               <Grid item xs={6}>
-              <TextField
+                <TextField
                   name='srcusername'
                   size="small"
                   label='Tài khoản đăng nhập'
@@ -197,18 +210,26 @@ export const Review = (props) => {
                   focused
                   variant="standard"
                 />
-                <TextField
-                  name='srcpassword'
-                  size="small"
-                  label='Mật khẩu'
-                  value={form.srcpassword}
-                  style={styles.style}
-                  InputProps={styles.InputProps}
-                  InputLabelProps={styles.InputLabelProps}
-                  fullWidth
-                  focused
-                  variant="standard"
-                />
+
+                <Box sx={{ flexGrow: 1 }}>
+                  <TextField
+                    name='srcpassword'
+                    size="small"
+                    type={(lvPassword[index] === true || lvPassword[index] === undefined) ? "password" : ''}
+                    label='Mật khẩu'
+                    value={form.srcpassword}
+                    style={styles.style}
+                    InputProps={styles.InputProps}
+                    InputLabelProps={styles.InputLabelProps}
+
+                    focused
+                    variant="standard"
+                  />
+
+                  <Button onClick={() => handleViewPassword(index)}>
+                    <RemoveRedEyeOutlinedIcon />
+                  </Button>
+                </Box>
 
                 <TextField
                   name='alias'
@@ -224,7 +245,7 @@ export const Review = (props) => {
                 />
               </Grid>
               <Grid item xs={12}>
-              <TextField
+                <TextField
                   name='tablename'
                   size="small"
                   multiline
@@ -248,7 +269,7 @@ export const Review = (props) => {
       {
         conf?.query?.map((formquery, index) => (
 
-          <Box sx={{ flexGrow: 1 }} style={{marginBottom: '30px'}}>
+          <Box sx={{ flexGrow: 1 }} style={{ marginBottom: '30px' }}>
             <h3><strong>Tổng hợp {index + 1} </strong></h3>
             <Grid container spacing={2}>
               <Grid item xs={6}>
