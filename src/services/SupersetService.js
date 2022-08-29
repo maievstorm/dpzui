@@ -2,8 +2,8 @@ import BaseAxios from "./BaseAxios";
 import config from "config";
 import UserService from "./UserService";
 import axios from "axios";
-import { wrapper } from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
+// import { wrapper } from 'axios-cookiejar-support';
+// import { CookieJar } from 'tough-cookie';
 
 
 
@@ -11,17 +11,17 @@ export const getCsrfToken = async (superset_token) => {
     let response
     const router = 'http://dpadv.apps.xplat.fis.com.vn/api/v1/security/csrf_token/'
 
-    const jar = new CookieJar();
-    const client = wrapper(axios.create({ jar }));
+    // const jar = new CookieJar();
+    // const client = wrapper(axios.create({ jar }));
 
-    return await client({
-        method: 'get',
-        url: router,
-        headers: {
-            "Authorization": `Bearer ${superset_token}`,
-            withCredentials: true
-        },
-    });
+    // return await client({
+    //     method: 'get',
+    //     url: router,
+    //     headers: {
+    //         "Authorization": `Bearer ${superset_token}`,
+    //         withCredentials: true
+    //     },
+    // });
 
     return response = await BaseAxios({
         method: 'get',
