@@ -2770,7 +2770,7 @@
     "loader-utils" "^2.0.0"
     "regex-parser" "^2.2.11"
 
-"agent-base@6":
+"agent-base@^6.0.2", "agent-base@6":
   "integrity" "sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ=="
   "resolved" "https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz"
   "version" "6.0.2"
@@ -3118,7 +3118,14 @@
   "resolved" "https://registry.npmjs.org/axe-core/-/axe-core-4.4.2.tgz"
   "version" "4.4.2"
 
-"axios@^0.27.2":
+"axios-cookiejar-support@^4.0.3":
+  "integrity" "sha512-fMQc0mPR1CikWZEwVC6Av+sD4cJuV2eo06HFA+DfhY54uRcO43ILGxaq7YAMTiM0V0SdJCV4NhE1bOsQYlfSkg=="
+  "resolved" "https://registry.npmjs.org/axios-cookiejar-support/-/axios-cookiejar-support-4.0.3.tgz"
+  "version" "4.0.3"
+  dependencies:
+    "http-cookie-agent" "^4.0.2"
+
+"axios@^0.27.2", "axios@>=0.20.0":
   "integrity" "sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ=="
   "resolved" "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
   "version" "0.27.2"
@@ -6597,6 +6604,13 @@
     "domhandler" "^4.0.0"
     "domutils" "^2.5.2"
     "entities" "^2.0.0"
+
+"http-cookie-agent@^4.0.2":
+  "integrity" "sha512-noTmxdH5CuytTnLj/Qv3Z84e/YFq8yLXAw3pqIYZ25Edhb9pQErIAC+ednw40Cic6Le/h9ryph5/TqsvkOaUCw=="
+  "resolved" "https://registry.npmjs.org/http-cookie-agent/-/http-cookie-agent-4.0.2.tgz"
+  "version" "4.0.2"
+  dependencies:
+    "agent-base" "^6.0.2"
 
 "http-deceiver@^1.2.7":
   "integrity" "sha1-+nFolEq5pRnTN8sL7HKE3D5yPYc=sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw==sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw== sha512-LmpOGxTfbpgtGVxJrj5k7asXHCgNZp5nLfp+hWc8QQRqtb7fUy6kRY3BO1h9ddF6yIPYUARgxGOwB42DnxIaNw=="
@@ -12435,14 +12449,15 @@
   "resolved" "https://registry.npmjs.org/toposort/-/toposort-2.0.2.tgz"
   "version" "2.0.2"
 
-"tough-cookie@^4.0.0":
-  "integrity" "sha512-tHdtEpQCMrc1YLrMaqXXcj6AxhYi/xgit6mZu1+EDWUn+qhUf8wMQoFIy9NXuq23zAwtcB0t/MjACGR18pcRbg=="
-  "resolved" "https://registry.npmjs.org/tough-cookie/-/tough-cookie-4.0.0.tgz"
-  "version" "4.0.0"
+"tough-cookie@^4.0.0", "tough-cookie@^4.1.2", "tough-cookie@>=4.0.0":
+  "integrity" "sha512-G9fqXWoYFZgTc2z8Q5zaHy/vJMjm+WV0AkAeHxVCQiEB1b+dGvWzFW6QV07cY5jQ5gRkeid2qIkzkxUnmoQZUQ=="
+  "resolved" "https://registry.npmjs.org/tough-cookie/-/tough-cookie-4.1.2.tgz"
+  "version" "4.1.2"
   dependencies:
     "psl" "^1.1.33"
     "punycode" "^2.1.1"
-    "universalify" "^0.1.2"
+    "universalify" "^0.2.0"
+    "url-parse" "^1.5.3"
 
 "tr46@^2.1.0":
   "integrity" "sha512-15Ih7phfcdP5YxqiB+iDtLoaTz4Nd35+IiAv0kQ5FNKHzXgdWqPoTIqEDDJmXceQt4JZk6lVPT8lnDlPpGDppw=="
@@ -12672,10 +12687,15 @@
   dependencies:
     "crypto-random-string" "^1.0.0"
 
-"universalify@^0.1.0", "universalify@^0.1.2":
+"universalify@^0.1.0":
   "integrity" "sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg=="
   "resolved" "https://registry.npmjs.org/universalify/-/universalify-0.1.2.tgz"
   "version" "0.1.2"
+
+"universalify@^0.2.0":
+  "integrity" "sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg=="
+  "resolved" "https://registry.npmjs.org/universalify/-/universalify-0.2.0.tgz"
+  "version" "0.2.0"
 
 "universalify@^2.0.0":
   "integrity" "sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ=="

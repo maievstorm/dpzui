@@ -8,7 +8,7 @@ import { CreateInvoiceProcess } from 'services/DataIngest';
 import Button from '@mui/material/Button';
 import { CreateUserStorage } from 'services/StorageConf';
 //import {KeycloakService} from 'services/KeycloakService';
-import {addKeycloakUser} from 'services/KeycloakService';
+import { addKeycloakUser } from 'services/KeycloakService';
 import { changeRequestStatus } from 'services/OfferPlanService';
 import UserAccount from 'services/UserAccount';
 import { styled } from '@mui/material/styles';
@@ -20,7 +20,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { addLog } from "services/LogService";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 import {
     Paper,
@@ -31,6 +31,8 @@ import {
     TableRow,
     TableBody
 } from '@mui/material';
+
+import { createDatabase, getCsrfToken, login,login1 } from 'services/SupersetService';
 
 export default function ReviewSubscription() {
 
@@ -45,11 +47,42 @@ export default function ReviewSubscription() {
     const current_plan_id = location?.state?.current_plan_id;
     const request_type = location?.state?.request_type;
     const requeststatus = location?.state?.request_status;
-  
+
     const [OfferSelected, setOfferSelected] = useState([])
     const [rows, setRows] = useState([])
     const [dataoffer, setdataoffer] = useState([])
     useEffect(() => {
+        login1()
+            .then(res => {
+                console.log('success:', res)
+                // getCsrfToken(res.data.access_token)
+                //     .then(({ config }) => {
+                //         console.log(config.jar.toJSON());
+                //     })
+                //     // .then(res=>{
+                //     //     console.log('csrf')
+                //     //     console.log(res)
+                //     //     console.log(res.headers)
+                //     //     console.log(res.cookie)
+                //     // })
+                //     .catch(err => {
+
+                //         console.log('err:', err)
+                //     })
+            })
+            .catch(err => {
+
+                console.log('err:', err)
+            })
+        // createDatabase()
+        // .then(res=>{
+        //     console.log('success:',res)
+        // })
+        // .catch(err=> {
+
+        //     console.log('err:',err)
+        // })
+
         OfferPlanService.getOffer()
             .then(res => {
 
@@ -124,9 +157,9 @@ export default function ReviewSubscription() {
             "group_admin": true
         }];
 
-        
+
         let data = {
-             user_account_id: account_id,
+            user_account_id: account_id,
             'username': username,
             'fullname': full_name,
             'email': email,
@@ -184,11 +217,11 @@ export default function ReviewSubscription() {
 
 
 
-        if (request_type === 1 && requeststatus==='0') {
+        if (request_type === 1 && requeststatus === '0') {
             const bodycreate = {
 
                 "user_group_type_id": 10,
-                "customer_invoice_data": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' +requestid,
+                "customer_invoice_data": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' + requestid,
                 "insert_ts": new Date().toLocaleString() + '',
                 "account_id": account_id,
                 "ingroup": ingroup,
@@ -204,11 +237,11 @@ export default function ReviewSubscription() {
                 "date_unsubscribed": null,
                 "insert_ts": new Date().toLocaleString() + '',
                 "requestsub_id": requestid,
-                "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' +requestid + new Date().toLocaleString() + '',
+                "subscription_name": 'Thuê bao ' + username + ' plan ' + current_plan_id + ' offer ' + OfferId + 'request' + requestid + new Date().toLocaleString() + '',
                 "requestsub_id": requestid
 
             };
-            
+
             axios({
                 method: 'post',
                 url: config.rootapi + '/subscription/creategroupsub',
@@ -305,7 +338,7 @@ export default function ReviewSubscription() {
 
                 })
                 .catch(err => console.log(err))
- 
+
 
 
 
