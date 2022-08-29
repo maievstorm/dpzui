@@ -8,8 +8,8 @@ import axios from "axios";
 
 
 export const getCsrfToken = async (superset_token) => {
-    let response
-    const router = 'http://dpadv.apps.xplat.fis.com.vn/api/v1/security/csrf_token/'
+    // let response
+    // const router = 'http://dpadv.apps.xplat.fis.com.vn/api/v1/security/csrf_token/'
 
     // const jar = new CookieJar();
     // const client = wrapper(axios.create({ jar }));
@@ -23,14 +23,14 @@ export const getCsrfToken = async (superset_token) => {
     //     },
     // });
 
-    return response = await BaseAxios({
-        method: 'get',
-        url: router,
-        headers: {
-            "Authorization": `Bearer ${superset_token}`,
-            withCredentials: true
-        },
-    })
+    // return response = await BaseAxios({
+    //     method: 'get',
+    //     url: router,
+    //     headers: {
+    //         "Authorization": `Bearer ${superset_token}`,
+    //         withCredentials: true
+    //     },
+    // })
 }
 
 
