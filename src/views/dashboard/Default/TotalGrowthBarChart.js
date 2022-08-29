@@ -183,7 +183,7 @@ const TotalGrowthBarChart = ({ isLoading,series,datauseage }) => {
                                             <Typography variant="subtitle2">Total Cost</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="h3">{datauseage[0]?.price_total_year} VND</Typography>
+                                            <Typography variant="h3">{datauseage[0]?.price_total_year} Tr.VND</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>

@@ -94,9 +94,7 @@ export default function ReviewItem(props) {
         setLvPassword({ ...lvPassword, [index]: value })
     }
 
-    console.log(lvPassword)
 
-    console.log(lvPassword[0])
 
 
 

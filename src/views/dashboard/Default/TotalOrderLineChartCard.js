@@ -124,11 +124,11 @@ const TotalOrderLineChartCard = ({ isLoading,datauseage }) => {
                                             <Grid item>
                                                 {timeValue ? (
                                                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        {datauseage[0]?.price_total_month} VND
+                                                        {datauseage[0]?.price_total_month} Tr.VND
                                                     </Typography>
                                                 ) : (
                                                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                       {datauseage[0]?.price_total_year} VND
+                                                       {datauseage[0]?.price_total_year} Tr.VND
                                                     </Typography>
                                                 )}
                                             </Grid>
