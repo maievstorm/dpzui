@@ -137,6 +137,7 @@ export const Source = (props) => {
                             <TextField
                                 name='srcpassword'
                                 size="small"
+                                type="password"
                                 label='Mật khẩu'
                                 onChange={event => handleFormSrcChange(event, index)}
                                 value={form.srcpassword}
