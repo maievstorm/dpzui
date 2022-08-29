@@ -52,28 +52,28 @@ export default function ReviewSubscription() {
     const [rows, setRows] = useState([])
     const [dataoffer, setdataoffer] = useState([])
     useEffect(() => {
-        login1()
-            .then(res => {
-                console.log('success:', res)
-                // getCsrfToken(res.data.access_token)
-                //     .then(({ config }) => {
-                //         console.log(config.jar.toJSON());
-                //     })
-                //     // .then(res=>{
-                //     //     console.log('csrf')
-                //     //     console.log(res)
-                //     //     console.log(res.headers)
-                //     //     console.log(res.cookie)
-                //     // })
-                //     .catch(err => {
+        // login1()
+        //     .then(res => {
+        //         console.log('success:', res)
+        //         // getCsrfToken(res.data.access_token)
+        //         //     .then(({ config }) => {
+        //         //         console.log(config.jar.toJSON());
+        //         //     })
+        //         //     // .then(res=>{
+        //         //     //     console.log('csrf')
+        //         //     //     console.log(res)
+        //         //     //     console.log(res.headers)
+        //         //     //     console.log(res.cookie)
+        //         //     // })
+        //         //     .catch(err => {
 
-                //         console.log('err:', err)
-                //     })
-            })
-            .catch(err => {
+        //         //         console.log('err:', err)
+        //         //     })
+        //     })
+        //     .catch(err => {
 
-                console.log('err:', err)
-            })
+        //         console.log('err:', err)
+        //     })
         // createDatabase()
         // .then(res=>{
         //     console.log('success:',res)
