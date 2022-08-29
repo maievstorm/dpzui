@@ -18,6 +18,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { processTime } from "./constant";
 
+import {
+    Grid
+
+} from "@mui/material";
+
 
 
 export default function ReviewItem(props) {
@@ -27,7 +32,7 @@ export default function ReviewItem(props) {
     const edit = props?.edit === undefined ? true : props?.edit === false ? true : false
     const onInputChanged = props?.onInputChanged
     const [subscription_id, setSubscription_id] = useState([]);
-   
+
 
     useEffect(() => {
         let router = config.rootapi + '/subscription/subbyusername/' + UserService.getUsername()
@@ -57,322 +62,342 @@ export default function ReviewItem(props) {
         setConfInfo({ ...conf, 'schedule_interval': crontab_struct });
     }, [conf?.Schedule])
 
-   
+    const styles = {
+        style: {
+            marginTop: '10px'
+        },
+        InputProps: {
+            style: { fontSize: 18 },
+            readOnly: edit,
+            disableUnderline: edit,
+        },
+        InputLabelProps: {
+            style: {
+                fontSize: 20,
+            }
+
+        }
+    }
+
+
 
 
     return (
         <div>
-            <Box component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off">
+            <h3>Thông số chi tiết tiến trình</h3>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <TextField
+                            id="DagId"
+                            name="DagId"
+                            label="Tên tiến trình"
+                            value={conf?.DagId}
+                            style={styles.style}
+                            InputProps={{
+                                readOnly: true,
+                                disableUnderline: true,
+                            }}
+                            InputLabelProps={styles.InputLabelProps}
+                            fullWidth
+                            variant="standard"
+                            // onChange={onInputChanged}
+                            focused
 
-                <TextField
-                    id="DagId"
-                    name="DagId"
-                    label="Tên tiến trình"
-                    value={conf?.DagId}
-                    InputProps={{
-                        readOnly: true,
-                        disableUnderline: true,
-                    }}
-                    variant="standard"
-                    // onChange={onInputChanged}
-                    focused
-                    size="small"
-
-                />
-               
-                {
-                    !edit && <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
-                        <Select id="Schedule" name='Schedule' value={conf?.Schedule} onChange={onInputChanged}
-                            size="small"
-                            style={divStyle}
-                            headername={'Tần suất chạy'}
-                        >
-
-                            {scheduletypes.map((scheduletype) => (
-                                <MenuItem
-                                    key={scheduletype.key}
-                                    value={scheduletype.key}
-                                >
-                                    {scheduletype.name}
-                                </MenuItem>
-                            ))}
-
-                        </Select>
-                    </FormControl>
-                }
-
-                {
-                    edit && <TextField
-                        label="Tần suất chạy"
-                        id="Schedule"
-                        name="Schedule"
-                        size="small"
-
-                        value={conf?.Schedule}
-                        // onChange={onInputChanged}
-                        InputProps={{
-                            readOnly: edit,
-                            disableUnderline: edit,
-                        }}
-                        variant="standard"
-                        focused
-
-                    />
-                }
-                {
-                    !edit && <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DateTimePicker
-                            label="Lịch chay"
-                            name="schedule_interval"
-                            value={dateValue}
-                            onChange={handleChange}
-                            renderInput={(params) => <TextField {...params} />}
                         />
-                    </LocalizationProvider>
-                }
 
-                {
-                    edit &&
-                    <TextField
-                        label="schedule_interval"
-                        id="schedule_interval"
-                        name="schedule_interval"
-                        size="small"
-
-                        value={conf?.schedule_interval}
-                        // onChange={onInputChanged}
-                        InputProps={{
-                            readOnly: edit,
-                            disableUnderline: true,
-                        }}
-                        variant="standard"
-                        focused
-
-                    />
-                }
-
-
-                <TextField
-                    label="Owner"
-                    id="Owner"
-                    name="Owner"
-                    size="small"
-
-                    value={conf?.owner}
-                    // onChange={onInputChanged}
-                    InputProps={{
-                        readOnly: edit,
-                        disableUnderline: true,
-                    }}
-                    variant="standard"
-                    focused
-
-                />
-
-                <TextField
-                    label="Tags"
-                    id="tags"
-                    name="tags"
-
-                    focused
-
-                    value={conf?.tags}
-                    onChange={onInputChanged}
-                    size="small"
-                    InputProps={{
-                        readOnly: edit,
-                        disableUnderline: edit,
-                    }}
-                    variant="standard"
-
-                />
-
-                {
-                    !edit &&
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Subscription</InputLabel>
-                        <Select id="subscription_id" name='subscription_id' value={conf?.subscription_id} onChange={onInputChanged}
-                            size="small"
-                            style={divStyle}
-                            headername={'Subscription id'}
-                        >
-
-                            {subscription_id.map((scheduletype) => (
-                                <MenuItem
-                                    key={scheduletype.subscription_id}
-                                    value={scheduletype.subscription_id}
+                        {
+                            !edit && <FormControl style={styles.style} fullWidth>
+                                <InputLabel id="demo-simple-select-label">Tần suất chạy</InputLabel>
+                                <Select id="Schedule" name='Schedule' value={conf?.Schedule} onChange={onInputChanged}
+                                    size="small"
+                                    style={divStyle}
+                                    headername={'Tần suất chạy'}
                                 >
-                                    {scheduletype.subscription_id}
-                                </MenuItem>
-                            ))}
 
-                        </Select>
-                    </FormControl>
+                                    {scheduletypes.map((scheduletype) => (
+                                        <MenuItem
+                                            key={scheduletype.key}
+                                            value={scheduletype.key}
+                                            style={styles.style}
+                                            InputProps={{
+                                                readOnly: true,
+                                                disableUnderline: true,
+                                            }}
+                                            InputLabelProps={styles.InputLabelProps}
+                                        >
+                                            {scheduletype.name}
+                                        </MenuItem>
+                                    ))}
 
-                }
+                                </Select>
+                            </FormControl>
+                        }
 
-                {
-                    edit && <TextField
-                        label="Subscription"
-                        id="subscription_id"
-                        name="subscription_id"
-                        size="small"
+                        {
+                            edit && <TextField
+                                label="Tần suất chạy"
+                                id="Schedule"
+                                name="Schedule"
 
-                        value={conf?.subscription_id}
-                        // onChange={onInputChanged}
-                        InputProps={{
-                            readOnly: edit,
-                            disableUnderline: edit,
-                        }}
-                        variant="standard"
-                        focused
+                                value={conf?.Schedule}
+                                // onChange={onInputChanged}
+                                InputProps={styles.InputProps}
+                                InputLabelProps={styles.InputLabelProps}
+                                fullWidth
+                                variant="standard"
+                                focused
 
-                    />
-                }
+                            />
+                        }
+                        {
+                            !edit && <>
+                            <br></br>
+                            <br></br>
+
+
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DateTimePicker
+                                    label="Lịch chay"
+                                    name="schedule_interval"
+                                    value={dateValue}
+                                    onChange={handleChange}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                            </>
+                        }
+
+                        {
+                            edit &&
+                            <TextField
+                                label="schedule_interval"
+                                id="schedule_interval"
+                                name="schedule_interval"
+
+                                value={conf?.schedule_interval}
+                                InputProps={styles.InputProps}
+                                InputLabelProps={styles.InputLabelProps}
+                                fullWidth
+                                variant="standard"
+                                focused
+
+                            />
+                        }
+
+
+                        <TextField
+                            label="Owner"
+                            id="Owner"
+                            name="Owner"
+
+                            value={conf?.owner}
+                            // onChange={onInputChanged}
+                            InputProps={styles.InputProps}
+                            InputLabelProps={styles.InputLabelProps}
+                            fullWidth
+                            variant="standard"
+                            focused
+
+                        />
+
+
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            label="Tags"
+                            id="tags"
+                            name="tags"
+                            focused
+                            value={conf?.tags}
+                            onChange={onInputChanged}
+                            InputProps={styles.InputProps}
+                            InputLabelProps={styles.InputLabelProps}
+                            fullWidth
+                            variant="standard"
+
+                        />
+
+                        {
+                            !edit &&
+                            <FormControl fullWidth style={styles.style}>
+                                <InputLabel id="demo-simple-select-label">Subscription</InputLabel>
+                                <Select id="subscription_id" name='subscription_id' value={conf?.subscription_id} onChange={onInputChanged}
+                                    size="small"
+                                    style={divStyle}
+                                    headername={'Subscription id'}
+                                >
+
+                                    {subscription_id.map((scheduletype) => (
+                                        <MenuItem
+                                            key={scheduletype.subscription_id}
+                                            value={scheduletype.subscription_id}
+                                        >
+                                            {scheduletype.subscription_id}
+                                        </MenuItem>
+                                    ))}
+
+                                </Select>
+                            </FormControl>
+
+                        }
+
+                        {
+                            edit && <TextField
+                                label="Subscription"
+                                id="subscription_id"
+                                name="subscription_id"
+
+                                value={conf?.subscription_id}
+                                InputProps={styles.InputProps}
+                                InputLabelProps={styles.InputLabelProps}
+                                fullWidth
+                                variant="standard"
+                                focused
+
+                            />
+                        }
+
+                    </Grid>
+                </Grid>
+
+
+
+
 
             </Box>
 
             <Box>
                 {
                     formSrcFields?.map((form, index) => (
-                        <Box
-                            key={index}
-                            component="form"
-                            sx={{
-                                '& .MuiTextField-root': { m: 1, width: '25ch' },
-                            }}
-                            noValidate
-                            autoComplete="off">
-
+                        <Box sx={{ flexGrow: 1 }}>
                             <h2> <strong>Nguồn dữ liệu {index + 1} </strong><br></br></h2>
-                            {
-                                !edit && <Select name='sourcetype' value={form.sourcetype} onChange={event => props.handleFormSrcChange(event, index)}
-                                    size="small"
-                                    style={divStyle}
-                                >
-                                    {datatypes.map((datatype) => (
-                                        <MenuItem
-                                            key={datatype.key}
-                                            value={datatype.key}
+
+
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    {
+                                        !edit && <Select name='sourcetype' value={form.sourcetype} onChange={event => props.handleFormSrcChange(event, index)}
+                                            size="small"
+                                            style={divStyle}
                                         >
-                                            {datatype.name}
-                                        </MenuItem>
-                                    ))}
+                                            {datatypes.map((datatype) => (
+                                                <MenuItem
+                                                    key={datatype.key}
+                                                    value={datatype.key}
+                                                >
+                                                    {datatype.name}
+                                                </MenuItem>
+                                            ))}
 
-                                </Select>
-                            }
-                            {
-                                edit &&
-                                <TextField
-                                    label='Source Type'
-                                    name='sourcetype'
-                                    onChange={event => props.handleFormSrcChange(event, index)}
+                                        </Select>
+                                    }
+                                    {
+                                        edit &&
+                                        <TextField
+                                            label='Source Type'
+                                            name='sourcetype'
+                                            onChange={event => props.handleFormSrcChange(event, index)}
 
-                                    value={form?.sourcetype}
-                                    size="small"
-                                    InputProps={{
-                                        readOnly: edit,
-                                        disableUnderline: edit,
-                                    }}
-                                    variant="standard"
-                                    focused
-                                />
-                            }
-                            <TextField
-                                label='Đường dẫn kết nối'
-                                name='connectstring'
-                                value={form?.connectstring}
-                                size="small"
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                            value={form?.sourcetype}
+                                            InputProps={styles.InputProps}
+                                            InputLabelProps={styles.InputLabelProps}
+                                            fullWidth
+                                            variant="standard"
+                                            focused
+                                        />
+                                    }
+                                    <TextField
+                                        label='Đường dẫn kết nối'
+                                        name='connectstring'
+                                        value={form?.connectstring}
+                                        onChange={event => props.handleFormSrcChange(event, index)}
 
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused
-                            />
-                            <TextField
-                                name='databasename'
-                                size="small"
-                                label='Tên cơ sở dữ liệu'
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused
+                                    />
+                                    <TextField
+                                        name='databasename'
+                                        label='Tên cơ sở dữ liệu'
+                                        onChange={event => props.handleFormSrcChange(event, index)}
 
-                                value={form.databasename}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused
-                            />
-                            <br></br>
-                            <TextField
-                                name='srcusername'
-                                size="small"
-                                label='Tài khoản đăng nhập'
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                        value={form.databasename}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused
+                                    />
+                                </Grid>
 
-                                value={form.srcusername}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused
-                            />
-                            <TextField
-                                name='srcpassword'
-                                size="small"
-                                label='Mật khẩu'
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                <Grid item xs={6}>
+                                    <TextField
+                                        name='srcusername'
+                                        label='Tài khoản đăng nhập'
+                                        onChange={event => props.handleFormSrcChange(event, index)}
 
-                                value={form.srcpassword}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused />
+                                        value={form.srcusername}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused
+                                    />
+                                    <TextField
+                                        name='srcpassword'
+                                        label='Mật khẩu'
+                                        onChange={event => props.handleFormSrcChange(event, index)}
 
-                            <TextField
-                                name='tablename'
-                                size="small"
-                                multiline
-                                fullWidth
-                                label='Tên bảng/Truy vấn/Tên file'
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                        value={form.srcpassword}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused />
 
-                                value={form.tablename}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused />
-                            <TextField
-                                name='alias'
-                                size="small"
-                                label='Tên bảng cho tiến trình'
-                                onChange={event => props.handleFormSrcChange(event, index)}
+                                    <TextField
+                                        name='alias'
+                                        label='Tên bảng cho tiến trình'
+                                        onChange={event => props.handleFormSrcChange(event, index)}
 
-                                value={form.alias}
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
-                                variant="standard"
-                                focused
-                            />
-                            {
-                                !edit && <Button style={divStyle} name="removesource" onClick={() => props?.removeFields(index)}><IconCircleMinus /></Button>
-                            }
+                                        value={form.alias}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused
+                                    />
+
+
+
+
+
+                                </Grid>
+
+                                <Grid item xs={12}>
+
+                                    <TextField
+                                        name='tablename'
+                                        multiline
+                                        label='Tên bảng/Truy vấn/Tên file'
+                                        onChange={event => props.handleFormSrcChange(event, index)}
+
+                                        value={form.tablename}
+                                        InputProps={styles.InputProps}
+                                        InputLabelProps={styles.InputLabelProps}
+                                        fullWidth
+                                        variant="standard"
+                                        focused />
+                                </Grid>
+                                {
+                                    !edit && <Button style={divStyle} name="removesource" onClick={() => props?.removeFields(index)}><IconCircleMinus /></Button>
+                                }
+                            </Grid>
+
+
                         </Box>
 
                     ))
@@ -404,14 +429,12 @@ export default function ReviewItem(props) {
                                 id="queryname"
                                 name="queryname"
                                 value={formquery?.queryname}
-                                size="small"
                                 style={divStyle}
                                 onChange={event => props.handleformQuery(event, index)}
 
-                                InputProps={{
-                                    readOnly: edit,
-                                    disableUnderline: edit,
-                                }}
+                                InputProps={styles.InputProps}
+                                InputLabelProps={styles.InputLabelProps}
+                                fullWidth
                                 variant="standard"
                                 focused
                             />
@@ -428,13 +451,11 @@ export default function ReviewItem(props) {
                                 edit && <TextField
                                     label="Bảng cần tổng hợp"
                                     value={formquery?.listsourcetable}
-                                    size="small"
                                     style={divStyle}
 
-                                    InputProps={{
-                                        readOnly: edit,
-                                        disableUnderline: edit,
-                                    }}
+                                    InputProps={styles.InputProps}
+                                    InputLabelProps={styles.InputLabelProps}
+                                    fullWidth
                                     variant="standard"
                                     focused
                                 />
@@ -447,40 +468,52 @@ export default function ReviewItem(props) {
                                 id="querydetail"
                                 name="querydetail"
                                 multiline
-                                size="small"
                                 fullWidth
                                 value={formquery?.querydetail}
                                 onChange={event => props.handleformQuery(event, index)}
 
                                 style={divStyle}
-                                InputProps={{
-                                    readOnly: edit,
-                                }}
+                                InputProps={styles.InputProps}
+                                InputLabelProps={styles.InputLabelProps}
                                 focused
                             />
                             <br></br>
 
+                            {
+                                edit && <TextField
+                                    label="Target table"
+                                    size="small"
+                                    value={formquery?.targettable}
+                                    style={styles.style}
+                                    InputProps={styles.InputProps}
+                                    InputLabelProps={styles.InputLabelProps}
+                                    focused
+                                    variant="standard"
+                                    fullWidth
+                                />
+                            }
 
+                            {
+                                !edit && <Select name='targettable'
+                                    value={formquery?.targettable}
+                                    onChange={event => props.handleformQuery(event, index)}
+                                    size="small"
+                                    style={divStyle}
+                                    variant="standard"
+                                    focused
+                                >
 
-                            <Select name='targettable'
-                                value={formquery?.targettable}
-                                onChange={event => props.handleformQuery(event, index)}
-                                size="small"
-                                style={divStyle}
-                                variant="standard"
-                                focused
-                            >
+                                    {formSrcFields?.map((formSrcField) => (
+                                        <MenuItem
+                                            key={formSrcField.alias}
+                                            value={formSrcField.alias}
+                                        >
+                                            {formSrcField.alias}
+                                        </MenuItem>
+                                    ))}
 
-                                {formSrcFields?.map((formSrcField) => (
-                                    <MenuItem
-                                        key={formSrcField.alias}
-                                        value={formSrcField.alias}
-                                    >
-                                        {formSrcField.alias}
-                                    </MenuItem>
-                                ))}
-
-                            </Select>
+                                </Select>
+                            }
                             {
                                 !edit && <Select name='writemode'
                                     value={formquery.writemode}
@@ -503,13 +536,10 @@ export default function ReviewItem(props) {
                             {
                                 edit && <TextField
                                     label="Write mode"
-                                    size="small"
                                     value={formquery?.writemode}
-                                    style={divStyle}
-                                    InputProps={{
-                                        readOnly: edit,
-                                        disableUnderline: edit,
-                                    }}
+                                    InputProps={styles.InputProps}
+                                    InputLabelProps={styles.InputLabelProps}
+                                    fullWidth
                                     variant="standard"
                                     focused
                                 />
