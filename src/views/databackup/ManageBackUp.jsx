@@ -10,11 +10,29 @@ import Button from '@mui/material/Button';
 import { Tooltip, IconButton } from '@mui/material';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import { GetProcess } from 'services/DataIngest';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+    Dialog,
+    DialogActions,
+    DialogTitle,
+    TextField,
+    Box,
+    Stack
+
+
+} from '@mui/material';
+import { PostgresBackupRestore } from 'services/BackupService';
 
 
 export default function ManageBackUp() {
-    
+
     const [rows, setData] = useState([]);
+    const [open, setOpen] = useState(false);
+
+    const [selectedData, setSelectedData] = useState([]);
+
     const columns = [
         {
             name: "id_invoice",
@@ -31,7 +49,7 @@ export default function ManageBackUp() {
             label: 'Tên backup',
         }
         ,
-        
+
         {
             name: "invoice_created_ts",
             options: {
@@ -48,55 +66,50 @@ export default function ManageBackUp() {
         }
 
     ];
-   
+
     useEffect(() => {
         GetProcess('backup')
-        .then(res => {
-            console.log(res)
-            setData(res.data.data.map(item=>{
-                let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString();
-                let invoice_due_ts = new Date(Date.parse(item.invoice_due_ts)).toLocaleString();
-                
-                return {
-                    'id_invoice':item.id_invoice,
-                    'item_name':item.item_name,
-                    'invoice_created_ts':invoice_created_ts,
-                    'invoice_due_ts':invoice_due_ts,
-                    'customer_invoice_data':item.customer_invoice_data
-                }
-            }));
-        }).catch(err => { console.log(err) })
+            .then(res => {
+                console.log(res)
+                setData(res.data.data.map(item => {
+                    let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString();
+                    let invoice_due_ts = new Date(Date.parse(item.invoice_due_ts)).toLocaleString();
+
+                    return {
+                        'id_invoice': item.id_invoice,
+                        'item_name': item.item_name,
+                        'invoice_created_ts': invoice_created_ts,
+                        'invoice_due_ts': invoice_due_ts,
+                        'customer_invoice_data': item.customer_invoice_data
+                    }
+                }));
+            }).catch(err => { console.log(err) })
     }, []);
 
 
 
 
-    
-    const onStartJobClickHandler = (selected) => {
-        console.log(selected);
-        const apidagurl = config.airflowapi + '/dags/' + selected + '/dagRuns'
 
-        const body = {
-            "conf": {},
-        }
-        axios({
-            method: 'post',
-            url: apidagurl,
-
-            auth: {
-                username: 'hung',
-                password: '123456a@'
-            },
-            data: body
-        });
-        navigate('loginformation',{state:{id:selected}})
-
+    const handleSelected = (selected) => {
+        let data = JSON.parse(selected?.customer_invoice_data)
+        data = data?.conf?.configInfo;
+        setSelectedData(data)
+        setOpen(true)
     }
 
-    const onEdittJobClickHandler = (type,selected) => {
-        navigate(type,{state:{id:selected}})
+    const handleRestore = () => {
+        let type = 'restore'
 
+        PostgresBackupRestore(selectedData.host, selectedData.port, selectedData.user, selectedData.password, selectedData.database, selectedData.file_name, type)
+            .then(res => {
+                toast.success("Restore backup thành công!");
+            })
+            .catch(err => {
+                toast.error("Restore backup thất bại!");
+                console.log(err)
+            })
     }
+
 
     const options = {
         filter: false,
@@ -106,42 +119,16 @@ export default function ManageBackUp() {
         textLabels: {},
         customToolbarSelect: selectedRows => (
             <>
-                <Tooltip title="Kích hoạt tiến trình">
+                <Tooltip title="Restore">
                     <IconButton
                         onClick={() => {
 
-                            onStartJobClickHandler(rows[selectedRows.data[0].dataIndex]['item_name']);
+                            handleSelected(rows[selectedRows.data[0].dataIndex]);
 
                         }}
 
                     >
                         <PlayCircleOutlineIcon />
-                    </IconButton>
-
-                </Tooltip>
-                <Tooltip title="Xem log">
-                    <IconButton
-                        onClick={() => {
-
-                            onEdittJobClickHandler('loginformation',rows[selectedRows.data[0].dataIndex]['item_name']);
-
-                        }}
-
-                    >
-                        <RateReviewIcon />
-                    </IconButton>
-
-                </Tooltip>
-                <Tooltip title="Hiệu chỉnh tiến trình">
-                    <IconButton
-                        onClick={() => {
-
-                            onEdittJobClickHandler('editflowjob',rows[selectedRows.data[0].dataIndex]['item_name']);
-
-                        }}
-
-                    >
-                        <ModeEditIcon />
                     </IconButton>
 
                 </Tooltip>
@@ -161,16 +148,50 @@ export default function ManageBackUp() {
         setLoading(false);
     }, []);
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div>
             <Button onClick={onClickHandler} > {<AddIcon />} Tạo sao lưu</Button>
-          
+
             <MUIDataTable isLoading={isLoading}
                 title={"Danh sách tiến trình"}
                 data={rows}
                 columns={columns}
                 options={options}
             />
+
+            <Dialog open={open}
+                onClose={handleClose} fullWidth={true}
+                maxWidth={'sm'}
+            >
+                <DialogTitle>Restore database</DialogTitle>
+                <Box marginLeft={10} marginRight={10} marginTop={5} >
+                    <Stack spacing={2}>
+                        <TextField label="host" name='host' value={selectedData?.host} InputProps={{ readOnly: true, }}></TextField>
+                        <TextField label="port" name='port' value={selectedData?.port} InputProps={{ readOnly: true, }}></TextField>
+                        <TextField label="user" name='user' value={selectedData?.user} InputProps={{ readOnly: true, }}></TextField>
+
+                        <TextField label="password" name='password' type={'password'} value={selectedData?.password} InputProps={{ readOnly: true, }}></TextField>
+                        <TextField label="database" name='database' value={selectedData?.database} InputProps={{ readOnly: true, }}></TextField>
+
+                        <TextField label="file_name" name='file_name' value={selectedData?.file_name} InputProps={{ readOnly: true, }}></TextField>
+
+                    </Stack>
+                    <br></br>
+                    <br></br>
+
+                    <DialogActions>
+                        <Button onClick={handleClose}>Huỷ</Button>
+                        <Button onClick={handleRestore} >Xác nhận</Button>
+
+                    </DialogActions>
+                </Box>
+            </Dialog>
+
+            <ToastContainer />
 
         </div>
 

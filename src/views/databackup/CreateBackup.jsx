@@ -18,6 +18,7 @@ import { addLog } from 'services/LogService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GetProcess } from 'services/DataIngest';
+import { PostgresBackupRestore } from 'services/BackupService';
 
 export default function CreateBackup() {
     const divStyle = {
@@ -90,7 +91,7 @@ export default function CreateBackup() {
 
         DataIngest.CreateInvoiceProcess(invoicebody)
             .then(res => {
-                toast.success("Thêm tiến trình backup thành công!");
+                toast.success("Thêm invoice backup thành công!");
 
                 addLog('create_flow', invoicebody)
                     .then(res => {
@@ -100,6 +101,16 @@ export default function CreateBackup() {
                     .catch(err => {
                         toast.error("Thêm log backup thất bại!");
                     })
+            })
+            .catch(err => {
+                toast.error("Thêm invoice backup thất bại!");
+                console.log(err)
+            })
+            let type = 'backup'
+        
+            PostgresBackupRestore(configInfo.host,configInfo.port,configInfo.user,configInfo.password,configInfo.database,configInfo.file_name,type)
+            .then(res => {
+                toast.success("Thêm tiến trình backup thành công!");
             })
             .catch(err => {
                 toast.error("Thêm tiến trình backup thất bại!");
