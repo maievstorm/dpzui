@@ -61,7 +61,6 @@ export default function CreateBackup() {
 
     }, [])
 
-    console.log(configInfo)
 
 
     const handleCancel = () => {

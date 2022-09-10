@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, useNavigate,useParams } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -13,6 +13,11 @@ export default function Logdetail() {
     const navigate = useNavigate()
     const location = useLocation()
     const DagIdnDagrunId = location?.state?.id;
+
+    console.log(DagIdnDagrunId)
+
+    // let params = useParams();
+    // const DagIdnDagrunId = params?.dagid;
     const [rows, setData] = useState([]);
 
     const getData = () => {
@@ -102,7 +107,7 @@ export default function Logdetail() {
     }; 
 
     const BacktoDag = (selected) => {
-        navigate('/dataingest/loginformation',{state:{id:selected}})
+        navigate('/dataingest/loginformation/' + selected)
 
     } 
 

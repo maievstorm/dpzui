@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardHeader, Grid,Box,Link,Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Grid, Box, Link, Typography } from "@mui/material";
 
 import { makeStyles } from '@mui/styles';
 
@@ -53,33 +53,31 @@ function DataaiPage() {
     const classes = useStyles();
 
     return (
-        <>
-         <Grid container spacing={3}>
-                        {ListProduct.map(prod => (
-                            <Grid item xs={12} md={4}>
-                                <Card variant="outlined">
-                                    <CardHeader title={prod.title} key={prod.title} className={classes.cardHeader}></CardHeader>
-                                    <CardContent>
-                                        <Box px={1}>
-                                            <Typography variant="h3" component="h3" gutterBottom={true}>
-                                                {prod.description}
-                                                
-                                            </Typography>
+        <Grid container spacing={3}>
+            {ListProduct.map((prod, key) => (
+                <Grid item xs={12} md={4} key={key}>
+                    <Card variant="outlined">
+                        <CardHeader title={prod.title} key={prod.title} className={classes.cardHeader}></CardHeader>
+                        <CardContent>
+                            <Box px={1}>
+                                <Typography variant="h3" component="h3" gutterBottom={true}>
+                                    {prod.description}
 
-                                           
+                                </Typography>
 
-                                        </Box>
-                                     
-                                        <Box mt={2}>
-                                           
-                                        </Box>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        ))}
-                      
-                    </Grid>
-        </>
+
+
+                            </Box>
+
+                            <Box mt={2}>
+
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            ))}
+
+        </Grid>
     )
 }
 

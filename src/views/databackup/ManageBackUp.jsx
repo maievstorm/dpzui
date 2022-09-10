@@ -73,7 +73,6 @@ export default function ManageBackUp() {
     useEffect(() => {
         GetProcess('backup')
             .then(res => {
-                console.log(res)
                 setData(res.data.data.map(item => {
                     let invoice_created_ts = new Date(Date.parse(item.invoice_created_ts)).toLocaleString();
                     let invoice_due_ts = new Date(Date.parse(item.invoice_due_ts)).toLocaleString();

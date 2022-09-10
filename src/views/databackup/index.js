@@ -8,12 +8,8 @@ import ManageBackUp from './ManageBackUp';
 
 const Databackuppage = () => (
     <MainCard title="Sao lưu dữ liệu">
-         <Typography variant="body2">  
-        
-         <ManageBackUp/>
-            
-         </Typography>  
-     </MainCard>
+         <ManageBackUp />
+    </MainCard>
 );
 
 export default Databackuppage;
