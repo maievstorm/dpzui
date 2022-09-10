@@ -2,7 +2,7 @@ import ManageStore from './ManageStore';
 
 
 const Objectstorepage = () => (
-   <ManageStore></ManageStore>
+   <ManageStore/>
 
     // <UploadMultiFiles></UploadMultiFiles>
 );

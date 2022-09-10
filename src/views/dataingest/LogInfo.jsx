@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, useNavigate,useParams } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -12,7 +12,9 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 export default function LogInfo() {
     const navigate = useNavigate()
     const location = useLocation()
-    const DagId = location?.state?.id
+    let params = useParams();
+    const DagId = params?.dagid;
+
     const [rows, setData] = useState([]);
 
 
@@ -105,7 +107,7 @@ export default function LogInfo() {
                 <Tooltip title="Xem chi tiết log">
                     <IconButton
                         onClick={() => {
-                            onEdittJobClickHandler('logdagdetail', DagId + '/dagRuns/' + rows[selectedRows.data[0].dataIndex]['dag_run_id']);
+                            onEdittJobClickHandler('/dataingest/loginformation/logdagdetail', DagId + '/dagRuns/' + rows[selectedRows.data[0].dataIndex]['dag_run_id']);
 
                         }}
 

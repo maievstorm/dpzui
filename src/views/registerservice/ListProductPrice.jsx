@@ -49,8 +49,8 @@ export default function ListProductPrice() {
    
 
     const onClickHander = (type, offerid) => {
-
-        navigate(type, { state: { id: offerid } })
+        let router = type + '/' + offerid
+        navigate(router)
 
     }
 
@@ -77,7 +77,7 @@ export default function ListProductPrice() {
                     </Box>
 
                     <Grid container spacing={3}>
-                        {listOffer.map(offer => {
+                        {listOffer.map((offer,index) => {
                             let listTable
                             let rows = []
                             try {
@@ -96,9 +96,9 @@ export default function ListProductPrice() {
                           
 
                             return (
-                                <Grid item xs={12} md={4}>
+                                <Grid item xs={12} md={4} key={index}>
                                     <Card variant="outlined">
-                                        <CardHeader title={offer.offer_name} key={offer.offer_name} className={classes.cardHeader}></CardHeader>
+                                        <CardHeader title={offer.offer_name} className={classes.cardHeader}></CardHeader>
                                         <CardContent>
                                             <Box px={1}>
                                                 <Typography variant="h3" component="h2" gutterBottom={true}>
@@ -115,9 +115,9 @@ export default function ListProductPrice() {
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
-                                                            {rows.map((row) => (
+                                                            {rows.map((row,child_index) => (
                                                                 <TableRow
-                                                                key={row.Offer}
+                                                                key={child_index}
                                                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                               >
                                                                 <TableCell component="th" scope="row">

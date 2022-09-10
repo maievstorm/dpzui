@@ -173,14 +173,13 @@ const MainRoutes = {
             element: <EditFlowJob />
         },
         {
-            path: '/dataingest/loginformation',
-            element: <LogInfo />
-        },
-        {
             path: '/dataingest/loginformation/logdagdetail',
             element: <Logdetail />
-        }
-        ,
+        },
+        {
+            path: '/dataingest/loginformation/:dagid',
+            element: <LogInfo />
+        },
         {
             path: '/objectstore/uploadmultifile',
             element: <UploadMultiFiles />
@@ -201,7 +200,7 @@ const MainRoutes = {
         }
         ,
         {
-            path: '/registerservice/offerdetail',
+            path: '/registerservice/offerdetail/:product',
             element: <OrderDetail />
         },
         {
