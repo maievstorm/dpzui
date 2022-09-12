@@ -1,17 +1,10 @@
 import { useState, useEffect } from 'react'
 import MUIDataTable from "mui-datatables";
-import axios from 'axios';
-import config from "../../config";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { Tooltip, IconButton } from '@mui/material';
-import RateReviewIcon from '@mui/icons-material/RateReview';
 import RestoreIcon from '@mui/icons-material/Restore';
-
-
 import { GetProcess } from 'services/DataIngest';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

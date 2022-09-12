@@ -61,9 +61,9 @@ const Dashboard = () => {
             }).catch(err => { console.log(err) })
     }, []);
 
-    console.log('datauseage',datauseage)
+    // console.log('datauseage',datauseage)
 
-    console.log('series',series)
+    // console.log('series',series)
 
   
     return (
