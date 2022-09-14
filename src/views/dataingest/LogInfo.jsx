@@ -13,7 +13,7 @@ export default function LogInfo() {
     const navigate = useNavigate()
     const location = useLocation()
     let params = useParams();
-    const DagId = params?.dagid;
+    const DagId = params?.jobid;
 
     const [rows, setData] = useState([]);
 

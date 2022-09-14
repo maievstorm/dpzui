@@ -169,7 +169,7 @@ const MainRoutes = {
             element: <DagGraph />
         },
         {
-            path: '/dataingest/editflowjob',
+            path: '/dataingest/editflowjob/:jobid',
             element: <EditFlowJob />
         },
         {
