@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router"
+import { useLocation, useNavigate,useParams } from "react-router"
 import ReviewItem from "./stepForm/ReviewItem"
 import config from "../../config";
 import Box from '@mui/material/Box';
@@ -23,8 +23,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function EditFlowJob() {
-    const location = useLocation()
-    const DagId = location?.state?.id
+    // const location = useLocation()
+
+    let params = useParams();
+    const DagId = params?.jobid;
+
+    console.log(DagId)
+    // const DagId = location?.state?.id
     const navigate = useNavigate()
 
     const [confInfo, setConfInfo] = useState()

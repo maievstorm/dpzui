@@ -97,6 +97,11 @@ export default function ManageFlow() {
 
     }
 
+    const handleViewJob = (type,selected) => {
+        navigate(type + '/' + selected)
+
+    }
+
     const options = {
         filter: false,
         print: false,
@@ -122,7 +127,7 @@ export default function ManageFlow() {
                     <IconButton
                         onClick={() => {
 
-                            onEdittJobClickHandler('loginformation',rows[selectedRows.data[0].dataIndex]['item_name']);
+                            handleViewJob('loginformation',rows[selectedRows.data[0].dataIndex]['item_name']);
 
                         }}
 
