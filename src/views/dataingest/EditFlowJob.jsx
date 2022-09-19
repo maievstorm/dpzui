@@ -291,7 +291,7 @@ export default function EditFlowJob() {
                 <h3><IconButton onClick={() => backtodataingest()}>
                     <ArrowBackIcon color="primary" fontSize="medium" />
                 </IconButton>Thông số chi tiết tiến trình</h3>
-                <Button onClick={showGraph}>Show dag graph</Button>
+                <Button onClick={showGraph}>Luồng dữ liệU</Button>
 
                 <Box sx={{ flexGrow: 1 }}>
                     <Grid container spacing={{ xs: 2, md: 2 }} columns={{ sm: 6, md: 12 }} style={divStyle}>
