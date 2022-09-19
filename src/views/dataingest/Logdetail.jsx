@@ -12,14 +12,15 @@ import { IconButton } from '@mui/material';
 export default function Logdetail() {
     const navigate = useNavigate()
     const location = useLocation()
-    const DagIdnDagrunId = location?.state?.id;
+    // const DagIdnDagrunId = location?.state?.id;
 
-    console.log(DagIdnDagrunId)
+    // console.log(DagIdnDagrunId)
 
-    // let params = useParams();
-    // const dagid = params?.dagid;
-    // const logid = params?.logid;
-    // const DagIdnDagrunId = dagid + '/dagRuns/'  + logid
+    let params = location.pathname.split('/')
+    const dagid = params[3]
+    const logid = params[4]
+    const DagIdnDagrunId = dagid + '/dagRuns/'  + logid
+
 
     console.log(DagIdnDagrunId)
     const [rows, setData] = useState([]);
