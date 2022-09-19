@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate,useParams } from "react-router"
+import { useLocation, useNavigate, useParams } from "react-router"
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import MUIDataTable from "mui-datatables";
 import DataIngest from "services/DataIngest";
 import RefreshIcon from '@mui/icons-material/Refresh';
-import {  IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 
 
 export default function Logdetail() {
@@ -17,34 +17,45 @@ export default function Logdetail() {
     console.log(DagIdnDagrunId)
 
     // let params = useParams();
-    // const DagIdnDagrunId = params?.dagid;
+    // const dagid = params?.dagid;
+    // const logid = params?.logid;
+    // const DagIdnDagrunId = dagid + '/dagRuns/'  + logid
+
+    console.log(DagIdnDagrunId)
     const [rows, setData] = useState([]);
 
     const getData = () => {
         DataIngest.Logdetail(DagIdnDagrunId)
             .then(res => {
-                
-                setData(res.data.task_instances.map(item => {
-                    let start_date = new Date(Date.parse(item.start_date)).toLocaleString()
-                    let end_date = new Date(Date.parse(item.end_date)).toLocaleString()
+
+                setData(res?.data?.task_instances.map(item => {
+                    let start_date = new Date().toLocaleString()
+                    let end_date = new Date().toLocaleString()
+
+                    if (item?.start_date && item?.end_date) {
+                        start_date = new Date(Date.parse(item?.start_date)).toLocaleString()
+                        end_date = new Date(Date.parse(item?.end_date)).toLocaleString()
+                    }
 
                     return {
-                        'task_id': item.task_id,
+                        'task_id': item?.task_id,
                         'start_date': start_date,
                         'end_date': end_date,
-                        'state': item.state,
-                        'duration' : item.duration,
+                        'state': item?.state,
+                        'duration': item?.duration,
                     }
                 }))
             })
 
     }
 
+    console.log(rows)
+
     useEffect(() => {
         getData();
 
     }, [])
-    const refresh = ()=>{
+    const refresh = () => {
         getData()
     }
 
@@ -63,7 +74,7 @@ export default function Logdetail() {
             },
             label: 'Bắt đầu',
         },
-      
+
         {
             name: "end_date",
             options: {
@@ -89,27 +100,27 @@ export default function Logdetail() {
         }
 
     ];
- 
+
     const options = {
         filter: false,
         print: false,
         selectableRows: "single",
         responsive: "standard",
         textLabels: {},
-        customToolbar: () =>{
+        customToolbar: () => {
             return (
                 <IconButton onClick={refresh}>{<RefreshIcon />}</IconButton>
             )
         },
-        selectableRows: 'none' 
-       
-       
-    }; 
+        selectableRows: 'none'
+
+
+    };
 
     const BacktoDag = (selected) => {
         navigate('/dataingest/loginformation/' + selected)
 
-    } 
+    }
 
     return (
         <Box>

@@ -176,6 +176,10 @@ const MainRoutes = {
             path: '/dataingest/loginformation/logdagdetail',
             element: <Logdetail />
         },
+        // {
+        //     path: '/dataingest/loginformation/:dagid/dagRuns/:logid',
+        //     element: <Logdetail />
+        // },
         {
             path: '/dataingest/loginformation/:dagid',
             element: <LogInfo />
