@@ -172,14 +172,14 @@ const MainRoutes = {
             path: '/dataingest/editflowjob/:jobid',
             element: <EditFlowJob />
         },
-        {
-            path: '/dataingest/loginformation/logdagdetail',
-            element: <Logdetail />
-        },
         // {
-        //     path: '/dataingest/loginformation/:dagid/dagRuns/:logid',
+        //     path: '/dataingest/loginformation/logdagdetail',
         //     element: <Logdetail />
         // },
+        {
+            path: '/dataingest/loginformation/:dagid/:logid',
+            element: <Logdetail />
+        },
         {
             path: '/dataingest/loginformation/:dagid',
             element: <LogInfo />
