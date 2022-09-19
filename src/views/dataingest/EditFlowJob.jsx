@@ -274,8 +274,7 @@ export default function EditFlowJob() {
         navigate('/dataingest/daggraph', {
             state:
             {
-                listsourcetable: formQuery.map(item => item.listsourcetable),
-                queryname: formQuery.map(item => item.queryname)
+                formQuery: formQuery
             }
         })
 
