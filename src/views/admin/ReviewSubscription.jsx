@@ -87,6 +87,7 @@ export default function ReviewSubscription() {
             .then(res => {
 
                 let data = (res.data.pre).filter((offer) => offer.offer_id === OfferId)[0]
+                console.log(data)
 
                 setOfferSelected((res.data.pre).filter((offer) => offer.offer_id === OfferId)[0])
                 let listTable = JSON.parse(data?.description)
