@@ -1,5 +1,5 @@
 {
-  "realm": "dpa",
+  "realm": "Dpa",
   "auth-server-url": "https://dpasso.apps.xplat.fis.com.vn/realms/dpa/protocol/openid-connect/auth",
   "ssl-required": "external",
   "resource": "dpaportal",
